@@ -27,11 +27,11 @@ public class Dashboard {
             }
 
             Event myEvent = makeEvent();
-            System.out.println("event added, it's called: " + myEvent.name + " on " + myEvent.date
-            + " at " + myEvent.location);
+            System.out.println("event added, it's called: ");
+            System.out.println(myEvent.name + " on " + myEvent.date + " at " + myEvent.location);
         }
 
-        System.out.println("Your list: " + eventList );
+        System.out.println("Your list: " + eventList);
     }
 
     public Event makeEvent() {
