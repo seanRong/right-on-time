@@ -31,8 +31,12 @@ public class Dashboard {
             System.out.println("event added, it's called: ");
             System.out.println(myEvent.name + " on " + myEvent.date + " at " + myEvent.location);
         }
-
-        System.out.println("Your list: " + eventList);
+        System.out.println("Your list: ");
+        for (int i = 0; i < eventList.size(); i++) {
+            System.out.println(eventList.get(i).date);
+            System.out.println(eventList.get(i).location);
+            System.out.println(eventList.get(i).name);
+        }
     }
 
     public Event makeEvent() {
