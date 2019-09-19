@@ -27,7 +27,6 @@ public class Dashboard {
                 System.out.println("unrecognized input");
                 continue;
             }
-
             if (choice.equals("done")) {
                 break;
             }
