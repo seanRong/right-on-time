@@ -11,7 +11,7 @@ public class Dashboard {
     private Scanner scanner;
 
     public Dashboard() {
-        eventList = new ArrayList<>();
+        eventList = new ArrayList<Event>();
         scanner = new Scanner(System.in);
         getEvents();
     }
@@ -22,6 +22,11 @@ public class Dashboard {
             System.out.println("Enter 'add' to add event or 'done' to exit");
             choice = scanner.nextLine();
             System.out.println("you selected: " + choice);
+
+            if (!(choice.equals("done") || choice.equals("add"))) {
+                System.out.println("unrecognized input");
+                continue;
+            }
 
             if (choice.equals("done")) {
                 break;
