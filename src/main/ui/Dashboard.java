@@ -1,6 +1,7 @@
 package ui;
 
 import model.Event;
+import model.EventLog;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -56,15 +57,13 @@ public class Dashboard {
         eventList.add(myEvent);
     }
 
-//    public String printEvents(Event eventList[]) {
-//        for (int i = 0; i < eventList.length; i++) {
-//            if(eventList[i] != null) {
-//                System.out.println(eventList[i].name);
-//                System.out.println(eventList[i].date);
-//                System.out.println(eventList[i].location);
-//            }
-//        }
+//    private void logEvent(EventLog eventLog, String name, int date, int location) {
+//        EventLog.addName(name);
+//        EventLog.addDate(date);
+//        EventLog.addLocation(location);
+//        eventList.add(eventLog);
 //    }
+
 
     public static void main(String[] args) {
         new Dashboard();
