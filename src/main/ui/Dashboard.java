@@ -1,7 +1,6 @@
 package ui;
 
 import model.Event;
-import model.EventLog;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,10 +12,10 @@ public class Dashboard {
     public Dashboard() {
         eventList = new ArrayList<Event>();
         scanner = new Scanner(System.in);
-        getEvents();
+        enterEvents();
     }
 
-    public void getEvents() {
+    public void enterEvents() {
         String choice = "";
         while (true) {
             System.out.println("Enter 'add' to add event or 'done' to exit");
@@ -30,17 +29,15 @@ public class Dashboard {
             if (choice.equals("done")) {
                 break;
             }
+            enterEvent();
+        }
+        dumpSchedule();
+    }
 
-            Event myEvent = makeEvent();
-            System.out.println("event added, it's called: ");
-            System.out.println(myEvent.name + " on " + myEvent.date + " at " + myEvent.location);
-        }
-        System.out.println("Your list: ");
-        for (int i = 0; i < eventList.size(); i++) {
-            System.out.println(eventList.get(i).date);
-            System.out.println(eventList.get(i).location);
-            System.out.println(eventList.get(i).name);
-        }
+    public void enterEvent() {
+        Event newEvent = makeEvent();
+        System.out.println("event added, it's called: ");
+        System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
     }
 
     public Event makeEvent() {
@@ -61,8 +58,15 @@ public class Dashboard {
         return myEvent;
     }
 
-    private void addEvent(Event myEvent) {
-        eventList.add(myEvent);
+    private void addEvent(Event newEvent) {
+        eventList.add(newEvent);
+    }
+
+    private void dumpSchedule() {
+        System.out.println("Your schedule: ");
+        for (int i = 0; i < eventList.size(); i++) {
+            System.out.println(eventList.get(i).getEventDetails());
+        }
     }
 
 //    private void logEvent(EventLog eventLog, String name, int date, int location) {
