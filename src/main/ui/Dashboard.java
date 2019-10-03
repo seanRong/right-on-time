@@ -1,9 +1,6 @@
 package ui;
 
-import model.EventEditor;
-import model.Event;
-import model.Loadable;
-import model.Saveable;
+import model.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -81,21 +78,21 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     // EFFECTS: shows the user what they just added
 
     public Event makeEvent() {
-        Event newEvent = new Event("",0,0);
+        EventInterface newEvent = new Event("",0,0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
-        newEvent.name = title;
+        ((Event) newEvent).name = title;
         System.out.println("Please enter event date");
         int date = scanner.nextInt();
-        newEvent.date = date;
+        ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
         int location = scanner.nextInt();
-        newEvent.location = location;
+        ((Event) newEvent).location = location;
         scanner.nextLine();
 
-        addEvent(newEvent);
+        addEvent((Event) newEvent);
 
-        return newEvent;
+        return (Event) newEvent;
     }
 
     public void addEvent(Event newEvent) {
