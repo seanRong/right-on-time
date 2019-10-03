@@ -177,7 +177,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
             System.out.println("previous state");
             System.out.println(eventJson);
 
-            eventJson.forEach(event -> parseEventJson((JSONObject) event ));
+            eventJson.forEach(event -> parseEventJson((JSONObject) event));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
