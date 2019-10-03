@@ -1,7 +1,5 @@
 package model;
 
-import ui.Dashboard;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -37,9 +35,6 @@ public class Event {
     //EFFECTS: returns a string containing the name, date and location of the event
     public String getEventDetails() {
         return this.name + " on " + this.date + " at " + this.location;
-//        System.out.println(this.name);
-//        System.out.println(this.date);
-//        System.out.println(this.location);
     }
 
 
