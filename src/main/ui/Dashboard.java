@@ -150,7 +150,9 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     //EFFECTS: prints the entire eventList, even if it's empty.
     private void dumpSchedule(ArrayList<Event> eventList) {
         System.out.println("Your schedule: ");
-        eventJson.forEach( event -> parseEventJson( (JSONObject) event ) );
+        eventJson.forEach(event -> parseEventJson((JSONObject) event));
+
+        System.out.println("new entries this session: ");
         for (int i = 0; i < eventList.size(); i++) {
             System.out.println(eventList.get(i).getEventDetails());
         }
