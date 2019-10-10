@@ -49,7 +49,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
                 enterEvents();
                 break;
             case "done":
-                dumpSchedule(eventList);
+                System.out.println(dumpSchedule(eventList));
                 save();
                 System.exit(0);
                 break;
@@ -68,9 +68,19 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
     public void enterEvent() {
-        Event newEvent = makeEvent();
-        System.out.println("event added, it's called: ");
-        System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
+        String choice = "";
+        System.out.println("Enter 'r' for repeated, 'o' for one-time");
+        choice = scanner.nextLine();
+        System.out.println("you selected: " + choice);
+        if (choice.equals("o")) {
+            Event newEvent = makeEvent();
+            System.out.println("event added, it's called: ");
+            System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
+        } else {
+            Event newEvent = makeEventRepeated();
+            System.out.println("event added, it's called: ");
+            System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
+        }
     }
 
     // REQUIRES: eventList already constructed
@@ -78,7 +88,25 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     // EFFECTS: shows the user what they just added
 
     public Event makeEvent() {
-        EventInterface newEvent = new Event("",0,0);
+        EventInterface newEvent = new OneTimeEvent("",0,0);
+        System.out.println("Please enter event title");
+        String title = scanner.nextLine();
+        ((Event) newEvent).name = title;
+        System.out.println("Please enter event date");
+        int date = scanner.nextInt();
+        ((Event) newEvent).date = date;
+        System.out.println("Please enter event location");
+        int location = scanner.nextInt();
+        ((Event) newEvent).location = location;
+        scanner.nextLine();
+
+        addEvent((Event) newEvent);
+
+        return (Event) newEvent;
+    }
+
+    public Event makeEventRepeated() {
+        EventInterface newEvent = new RepeatedEvent("",0,0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
         ((Event) newEvent).name = title;
@@ -105,9 +133,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         JSONObject eventObject = new JSONObject();
         eventObject.put("event", eventDetails);
 
-        //Add employees to list
         this.eventJson.add(eventObject);
-
     }
 
     // REQUIRES: an event with the given name
@@ -145,14 +171,18 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     }
 
     //EFFECTS: prints the entire eventList, even if it's empty.
-    private void dumpSchedule(ArrayList<Event> eventList) {
+    public String dumpSchedule(ArrayList<Event> eventList) {
         System.out.println("Your schedule: ");
-        eventJson.forEach(event -> parseEventJson((JSONObject) event));
+        eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
 
         System.out.println("new entries this session: ");
+        StringBuffer toPrint = new StringBuffer();
+
         for (int i = 0; i < eventList.size(); i++) {
-            System.out.println(eventList.get(i).getEventDetails());
+            toPrint.append(eventList.get(i).getEventDetails());
         }
+
+        return toPrint.toString();
     }
 
     public void save() {
@@ -176,8 +206,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
             eventJson = (JSONArray) obj;
             System.out.println("previous state");
             System.out.println(eventJson);
-
-            eventJson.forEach(event -> parseEventJson((JSONObject) event));
+            eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -188,7 +217,19 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         }
     }
 
-    private static void parseEventJson(JSONObject eventJson) {
+    public String loadDiff(String filename) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        FileReader reader = new FileReader(filename);
+        Object obj = jsonParser.parse(reader);
+        eventJson = (JSONArray) obj;
+        StringBuffer eventStrings = new StringBuffer();
+        for (int i = 0; i < eventJson.size(); i++) {
+            eventStrings.append(parseEventJson((JSONObject) eventJson.get(i)));
+        }
+        return eventStrings.toString();
+    }
+
+    public static String parseEventJson(JSONObject eventJson) {
         JSONObject eventObject = (JSONObject) eventJson.get("event");
 
         String name = (String) eventObject.get("name");
@@ -197,7 +238,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
 
         String time = String.valueOf(eventObject.get("time"));
 
-        System.out.println(name + " on " + time + " at " + location);
+        return (name + " on " + time + " at " + location);
     }
 
 

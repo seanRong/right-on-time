@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Event implements EventInterface {
+public abstract class Event implements EventInterface {
     public String name;
     public int date;
     public long location; //will be coordinates
