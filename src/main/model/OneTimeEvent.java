@@ -16,4 +16,8 @@ public class OneTimeEvent extends Event {
         this.priority = p;
         return p;
     }
+
+    public String getEventType() {
+        return "one time";
+    }
 }

@@ -44,4 +44,9 @@ public class OneTimeEventTest {
         eventTest.setPriority("high");
         assertEquals( "high", eventTest.getPriority());
     }
+
+    @Test
+    void testGetType() {
+        assertEquals(eventTest.getEventType(), "one time");
+    }
 }

@@ -101,6 +101,8 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         scanner.nextLine();
 
         addEvent((Event) newEvent);
+        System.out.println("added one time event");
+
 
         return (Event) newEvent;
     }
@@ -119,6 +121,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         scanner.nextLine();
 
         addEvent((Event) newEvent);
+        System.out.println("added repeated event");
 
         return (Event) newEvent;
     }

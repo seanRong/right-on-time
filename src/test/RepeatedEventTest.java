@@ -46,4 +46,9 @@ public class RepeatedEventTest {
         assertEquals( "yearly", eventTest.getRepeatInterval());
     }
 
+    @Test
+    void testGetType() {
+        assertEquals(eventTest.getEventType(), "repeated");
+    }
+
 }

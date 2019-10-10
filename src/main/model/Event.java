@@ -37,6 +37,8 @@ public abstract class Event implements EventInterface {
         return this.name + " on " + this.date + " at " + this.location;
     }
 
-
+    public String getEventType() {
+        return "no type specified";
+    }
 
 }

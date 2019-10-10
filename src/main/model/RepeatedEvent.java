@@ -16,4 +16,8 @@ public class RepeatedEvent extends Event {
     public String getRepeatInterval() {
         return this.repeatInterval;
     }
+
+    public String getEventType() {
+        return "repeated";
+    }
 }
