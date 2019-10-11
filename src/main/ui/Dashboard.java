@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     private static JSONArray eventJson;
     public ArrayList<Event> eventList;
     private Scanner scanner;
+    SimpleDateFormat parser = new SimpleDateFormat("HH:mm MMM dd yyyy");
+
 
     // Constructs a dashboard
     // MODIFIES: this
@@ -88,12 +91,13 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     // EFFECTS: shows the user what they just added
 
     public Event makeEvent() {
-        EventInterface newEvent = new OneTimeEvent("",0,0);
+        SimpleDateFormat initialDate = parser.parse("00:00 JAN 01 2000");
+        OneTimeEvent newEvent = new OneTimeEvent("",initialDate,0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
         ((Event) newEvent).name = title;
         System.out.println("Please enter event date");
-        int date = scanner.nextInt();
+        SimpleDateFormat date = parser.parse(scanner.nextLine();
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
         int location = scanner.nextInt();
@@ -108,12 +112,12 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     }
 
     public Event makeEventRepeated() {
-        EventInterface newEvent = new RepeatedEvent("",0,0);
+        RepeatedEvent newEvent = new RepeatedEvent("",0,0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
         ((Event) newEvent).name = title;
         System.out.println("Please enter event date");
-        int date = scanner.nextInt();
+        SimpleDateFormat date = scanner.nextInt();
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
         int location = scanner.nextInt();
@@ -200,25 +204,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         }
     }
 
-    public void load() {
-        JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("schedule.json")) {
-            Object obj = jsonParser.parse(reader);
-
-            eventJson = (JSONArray) obj;
-            System.out.println("previous state");
-            System.out.println(eventJson);
-            eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 
     public String loadDiff(String filename) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();

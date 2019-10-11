@@ -4,10 +4,16 @@ import model.OneTimeEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class OneTimeEventTest {
+public class OneTimeEventTest extends Event{
     private OneTimeEvent eventTest;
+
+    public OneTimeEventTest(String eventName, SimpleDateFormat eventDate, long eventLocation) {
+        super(eventName, eventDate, eventLocation);
+    }
 
     @BeforeEach
     void runBefore() {

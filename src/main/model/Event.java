@@ -1,17 +1,16 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
-public abstract class Event implements EventInterface {
+public abstract class Event {
     public String name;
-    public int date;
+    public SimpleDateFormat date;
     public long location; //will be coordinates
 
     // Constructs an event
     //MODIFIES: this
     // EFFECTS: event has name eventName, date eventDate, location eventLocation
-    public Event(String eventName, int eventDate, long eventLocation) {
+    public Event(String eventName, SimpleDateFormat eventDate, long eventLocation) {
         this.name = eventName;
         this.date = eventDate;
         this.location = eventLocation;
@@ -23,7 +22,7 @@ public abstract class Event implements EventInterface {
     }
 
     //EFFECTS: returns the int of the event's date
-    public int getEventDate() {
+    public SimpleDateFormat getEventDate() {
         return this.date;
     }
 
@@ -37,7 +36,7 @@ public abstract class Event implements EventInterface {
         return this.name + " on " + this.date + " at " + this.location;
     }
 
-    public String getEventType() {
+    protected String getEventType() {
         return "no type specified";
     }
 
