@@ -1,1 +1,1 @@
-[{"event":{"name":"lol","location":6,"time":3}},{"event":{"name":"onetime","location":2000,"time":10}}]
+[{"event":{"name":"lol","location":6,"time":3}},{"event":{"name":"onetime","location":2000,"time":10}},{"event":{"name":"test event","location":2000,"time":20}}]
