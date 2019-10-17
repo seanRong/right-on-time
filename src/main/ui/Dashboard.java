@@ -1,32 +1,22 @@
 package ui;
 
 import model.*;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Dashboard implements EventEditor, Loadable, Saveable {
-    private static JSONArray eventJson;
-    public ArrayList<Event> eventList;
+public class Dashboard implements EventUI {
+
     private Scanner scanner;
+    private EventManager eventManager;
 
     // Constructs a dashboard
     // MODIFIES: this
     // EFFECTS: makes a new scanner and ArrayList. beings the enterEvents process.
     public Dashboard() {
-        eventList = new ArrayList<Event>();
         scanner = new Scanner(System.in);
-        JSONArray eventJson = new JSONArray();
-        this.eventJson = eventJson;
-        load();
+        eventManager = new EventManager();
         enterEvents();
     }
 
@@ -49,8 +39,8 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
                 enterEvents();
                 break;
             case "done":
-                System.out.println(dumpSchedule(eventList));
-                save();
+                System.out.println(eventManager.dumpSchedule(eventManager.getEventList()));
+                eventManager.save();
                 System.exit(0);
                 break;
             case "edit":
@@ -100,7 +90,7 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         ((Event) newEvent).location = location;
         scanner.nextLine();
 
-        addEvent((Event) newEvent);
+        eventManager.addEvent((Event) newEvent);
         System.out.println("added one time event");
 
 
@@ -120,24 +110,12 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
         ((Event) newEvent).location = location;
         scanner.nextLine();
 
-        addEvent((Event) newEvent);
+        eventManager.addEvent((Event) newEvent);
         System.out.println("added repeated event");
 
         return (Event) newEvent;
     }
 
-    public void addEvent(Event newEvent) {
-        eventList.add(newEvent);
-        JSONObject eventDetails = new JSONObject();
-        eventDetails.put("name", newEvent.name);
-        eventDetails.put("location", newEvent.location);
-        eventDetails.put("time", newEvent.date);
-
-        JSONObject eventObject = new JSONObject();
-        eventObject.put("event", eventDetails);
-
-        this.eventJson.add(eventObject);
-    }
 
     // REQUIRES: an event with the given name
     // MODIFIES: the selected event
@@ -172,78 +150,6 @@ public class Dashboard implements EventEditor, Loadable, Saveable {
     private void editEventLocation() {
         System.out.println("todo");
     }
-
-    //EFFECTS: prints the entire eventList, even if it's empty.
-    public String dumpSchedule(ArrayList<Event> eventList) {
-        System.out.println("Your schedule: ");
-        eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
-
-        System.out.println("new entries this session: ");
-        StringBuffer toPrint = new StringBuffer();
-
-        for (int i = 0; i < eventList.size(); i++) {
-            toPrint.append(eventList.get(i).getEventDetails());
-        }
-
-        return toPrint.toString();
-    }
-
-    public void save() {
-        //Write JSON file
-        try (FileWriter file = new FileWriter("schedule.json")) {
-
-            file.write(eventJson.toJSONString());
-            file.flush();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void load() {
-        JSONParser jsonParser = new JSONParser();
-
-        try (FileReader reader = new FileReader("schedule.json")) {
-            Object obj = jsonParser.parse(reader);
-
-            eventJson = (JSONArray) obj;
-            System.out.println("previous state");
-            System.out.println(eventJson);
-            eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String loadDiff(String filename) throws IOException, ParseException {
-        JSONParser jsonParser = new JSONParser();
-        FileReader reader = new FileReader(filename);
-        Object obj = jsonParser.parse(reader);
-        eventJson = (JSONArray) obj;
-        StringBuffer eventStrings = new StringBuffer();
-        for (int i = 0; i < eventJson.size(); i++) {
-            eventStrings.append(parseEventJson((JSONObject) eventJson.get(i)));
-        }
-        return eventStrings.toString();
-    }
-
-    public static String parseEventJson(JSONObject eventJson) {
-        JSONObject eventObject = (JSONObject) eventJson.get("event");
-
-        String name = (String) eventObject.get("name");
-
-        String location = String.valueOf(eventObject.get("location"));
-
-        String time = String.valueOf(eventObject.get("time"));
-
-        return (name + " on " + time + " at " + location);
-    }
-
 
     // EFFECTS: starts program by making a new dashboard
     @SuppressWarnings("unchecked")
