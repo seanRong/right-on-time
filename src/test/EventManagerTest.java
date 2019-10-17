@@ -20,12 +20,11 @@ public class EventManagerTest {
     private OneTimeEvent anotherEvent;
     private String defaultDateRaw = "31/12/1998";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
-    private String secondDateRaw = "31/12/1998";
+    private String secondDateRaw = "13/12/1998";
     Date secondDate = new SimpleDateFormat("dd/MM/yyyy").parse(secondDateRaw);
 
     public EventManagerTest() throws ParseException {
     }
-
 
     @BeforeEach
     void runBefore() {
@@ -64,14 +63,16 @@ public class EventManagerTest {
     void testTooBusyException() {
         try {
             eventManagerTest.addEvent(event);
-            eventManagerTest.addEvent(anotherEvent);
+            eventManagerTest.dupeCheck(anotherEvent);
+//            eventManagerTest.addEvent(anotherEvent);
         } catch (TooBusyException e) {
             fail("I was not expecting TooBusyException!");
         }
 
         try {
-            eventManagerTest.addEvent(event);
-            eventManagerTest.addEvent(event);
+            eventManagerTest.dupeCheck(event);
+            eventManagerTest.dupeCheck(event);
+//            eventManagerTest.addEvent(event);
             fail("I was expecting TooBusyException!");
         } catch (TooBusyException e) {
         }

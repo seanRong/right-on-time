@@ -96,24 +96,21 @@ public class EventManager implements Loadable, Saveable {
         eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
 
         System.out.println("new entries this session: ");
-        StringBuffer toPrint = new StringBuffer();
+        StringBuilder toPrint = new StringBuilder();
 
-        for (int i = 0; i < eventList.size(); i++) {
-            toPrint.append(eventList.get(i).getEventDetails());
+        for (Event event : eventList) {
+            toPrint.append(event.getEventDetails());
         }
 
         return toPrint.toString();
     }
 
-    public void addEvent(Event newEvent) throws TooBusyException {
+    public void addEvent(Event newEvent) {
         try {
-            if (dupeCheck(newEvent)) {
-                throw new TooBusyException("too many events on one day");
-            } else {
-                eventList.add(newEvent);
-                JSONObject eventObject = createJsonObject(newEvent);
-                eventJson.add(eventObject);
-            }
+            dupeCheck(newEvent);
+            eventList.add(newEvent);
+            JSONObject eventObject = createJsonObject(newEvent);
+            eventJson.add(eventObject);
         } catch (TooBusyException e) {
             System.out.println("cannot add");
 //            eventList.remove(eventList.size() - 1);
@@ -127,10 +124,10 @@ public class EventManager implements Loadable, Saveable {
         JSONObject eventDetails = new JSONObject();
         eventDetails.put("name", newEvent.getEventName());
         eventDetails.put("location", newEvent.getEventLocation());
-//        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-//        String strDate = dateFormat.format(newEvent.date);
-//        eventDetails.put("time", strDate);
-        eventDetails.put("time", newEvent.getEventDate());
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String strDate = dateFormat.format(newEvent.date);
+        eventDetails.put("time", strDate);
+//        eventDetails.put("time", newEvent.getEventDate());
 
         JSONObject eventObject = new JSONObject();
         eventObject.put("event", eventDetails);
@@ -139,15 +136,17 @@ public class EventManager implements Loadable, Saveable {
     }
 
 
-    private Boolean dupeCheck(Event newEvent) {
+    public void dupeCheck(Event newEvent) throws TooBusyException {
         boolean dupe = false;
         for (int i = 0; i < eventList.size(); i++) {
-            if (eventList.get(i).getEventDate() == newEvent.getEventDate()) {
+            if (eventList.get(i).getEventDate().equals(newEvent.getEventDate())) {
                 dupe = true;
             }
         }
 
-        return dupe;
+        if (dupe) {
+            throw new TooBusyException("too many events on one day");
+        }
     }
 
 }

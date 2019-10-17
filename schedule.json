@@ -1,1 +1,1 @@
-[{"event":{"name":"standin","location":1000,"time":Tue Jun 20 00:00:00 PDT 2000}},{"event":{"name":"birt","location":2000,"time":Tue Jun 20 00:00:00 PDT 2000}}]
+[{"event":{"name":"standin","location":1000,"time":"Tue Jun 20 00:00:00 PDT 2000"}},{"event":{"name":"test event","location":2000,"time":"31-00-1998"}},{"event":{"name":"test event","location":2000,"time":"31-00-1998"}},{"event":{"name":"test event","location":2000,"time":"31-00-1998"}},{"event":{"name":"test event","location":2000,"time":"31-00-1998"}}]
