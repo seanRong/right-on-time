@@ -5,14 +5,23 @@ import model.RepeatedEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RepeatedEventTest {
     private RepeatedEvent eventTest;
+    private String defaultDateRaw = "31/12/1998";
+    Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
+
+    public RepeatedEventTest() throws ParseException {
+    }
 
     @BeforeEach
     void runBefore() {
-        eventTest = new RepeatedEvent("some name", 10, 2000);
+        eventTest = new RepeatedEvent("some name", defaultDate, 2000);
     }
 
     @Test

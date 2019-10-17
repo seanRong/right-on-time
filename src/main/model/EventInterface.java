@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Date;
+
 public interface EventInterface {
     String getEventName();
 
-    int getEventDate();
+    Date getEventDate();
 
     long getEventLocation();
 

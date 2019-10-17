@@ -3,6 +3,9 @@ package ui;
 import model.*;
 import org.json.simple.JSONObject;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,11 +13,13 @@ public class Dashboard implements EventUI {
 
     private Scanner scanner;
     private EventManager eventManager;
+    private String defaultDateRaw = "31/12/1998";
+    Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
 
     // Constructs a dashboard
     // MODIFIES: this
     // EFFECTS: makes a new scanner and ArrayList. beings the enterEvents process.
-    public Dashboard() {
+    public Dashboard() throws ParseException, TooBusyException {
         scanner = new Scanner(System.in);
         eventManager = new EventManager();
         enterEvents();
@@ -22,7 +27,7 @@ public class Dashboard implements EventUI {
 
     // Logic for adding events
     // EFFECTS: infinite loop that takes user input and passes input to resolver
-    public void enterEvents() {
+    public void enterEvents() throws ParseException, TooBusyException {
         String choice = "";
         System.out.println("Enter 'add' to add event, 'edit' to edit existing event, or 'done' to exit");
         choice = scanner.nextLine();
@@ -32,7 +37,7 @@ public class Dashboard implements EventUI {
 
     // routes user based on choice string
     // EFFECTS: may print statements to sout, otherwise leads user to next method
-    public void resolveChoice(String choice) {
+    public void resolveChoice(String choice) throws ParseException, TooBusyException {
         switch (choice) {
             case "add":
                 enterEvent();
@@ -57,7 +62,7 @@ public class Dashboard implements EventUI {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-    public void enterEvent() {
+    public void enterEvent() throws ParseException, TooBusyException {
         String choice = "";
         System.out.println("Enter 'r' for repeated, 'o' for one-time");
         choice = scanner.nextLine();
@@ -77,13 +82,14 @@ public class Dashboard implements EventUI {
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
 
-    public Event makeEvent() {
-        EventInterface newEvent = new OneTimeEvent("",0,0);
+    public Event makeEvent() throws ParseException, TooBusyException {
+        EventInterface newEvent = new OneTimeEvent("", defaultDate, 0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
         ((Event) newEvent).name = title;
-        System.out.println("Please enter event date");
-        int date = scanner.nextInt();
+        System.out.println("Please enter event date dd/MM/yyyy");
+        String rawDate = scanner.nextLine();
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
         int location = scanner.nextInt();
@@ -97,13 +103,14 @@ public class Dashboard implements EventUI {
         return (Event) newEvent;
     }
 
-    public Event makeEventRepeated() {
-        EventInterface newEvent = new RepeatedEvent("",0,0);
+    public Event makeEventRepeated() throws ParseException, TooBusyException {
+        EventInterface newEvent = new RepeatedEvent("", defaultDate,0);
         System.out.println("Please enter event title");
         String title = scanner.nextLine();
         ((Event) newEvent).name = title;
-        System.out.println("Please enter event date");
-        int date = scanner.nextInt();
+        System.out.println("Please enter event date dd/MM/yyyy");
+        String rawDate = scanner.nextLine();
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
         int location = scanner.nextInt();
@@ -152,8 +159,7 @@ public class Dashboard implements EventUI {
     }
 
     // EFFECTS: starts program by making a new dashboard
-    @SuppressWarnings("unchecked")
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, TooBusyException {
         new Dashboard();
     }
 }

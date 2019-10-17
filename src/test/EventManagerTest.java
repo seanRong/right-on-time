@@ -2,27 +2,37 @@ import model.Event;
 
 import model.EventManager;
 import model.OneTimeEvent;
+import model.TooBusyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EventManagerTest {
     private EventManager eventManagerTest;
     private ArrayList<Event> testEventList;
     private OneTimeEvent event;
     private OneTimeEvent anotherEvent;
+    private String defaultDateRaw = "31/12/1998";
+    Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
+    private String secondDateRaw = "31/12/1998";
+    Date secondDate = new SimpleDateFormat("dd/MM/yyyy").parse(secondDateRaw);
+
+    public EventManagerTest() throws ParseException {
+    }
 
 
     @BeforeEach
     void runBefore() {
         eventManagerTest = new EventManager();
         testEventList = new ArrayList<Event>();
-        event = new OneTimeEvent("test event", 20, 2000);
-        anotherEvent = new OneTimeEvent("second event", 25, 4500);
+        event = new OneTimeEvent("test event", defaultDate, 2000);
+        anotherEvent = new OneTimeEvent("second event", secondDate, 4500);
     }
 
     @Test
@@ -31,7 +41,7 @@ public class EventManagerTest {
     }
 
     @Test
-    void testAddEvent() {
+    void testAddEvent() throws TooBusyException {
         eventManagerTest.addEvent(event);
         assertTrue(eventManagerTest.getEventList().contains(event));
     }
@@ -43,11 +53,28 @@ public class EventManagerTest {
     }
 
     @Test
-    void testSave() {
+    void testSave() throws TooBusyException {
         eventManagerTest.addEvent(event);
         eventManagerTest.save();
         eventManagerTest.load();
         assertTrue(eventManagerTest.getEventList().contains(event));
+    }
+
+    @Test
+    void testTooBusyException() {
+        try {
+            eventManagerTest.addEvent(event);
+            eventManagerTest.addEvent(anotherEvent);
+        } catch (TooBusyException e) {
+            fail("I was not expecting TooBusyException!");
+        }
+
+        try {
+            eventManagerTest.addEvent(event);
+            eventManagerTest.addEvent(event);
+            fail("I was expecting TooBusyException!");
+        } catch (TooBusyException e) {
+        }
     }
 
 

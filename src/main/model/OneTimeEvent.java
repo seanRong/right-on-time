@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Date;
+
 public class OneTimeEvent extends Event {
     public String priority;
 
-    public OneTimeEvent(String eventName, int eventDate, long eventLocation) {
+    public OneTimeEvent(String eventName, Date eventDate, long eventLocation) {
         super(eventName, eventDate, eventLocation);
         this.priority = "low";
     }

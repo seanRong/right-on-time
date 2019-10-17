@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class EventManager implements Loadable, Saveable {
@@ -103,17 +105,49 @@ public class EventManager implements Loadable, Saveable {
         return toPrint.toString();
     }
 
-    public void addEvent(Event newEvent) {
-        eventList.add(newEvent);
+    public void addEvent(Event newEvent) throws TooBusyException {
+        try {
+            if (dupeCheck(newEvent)) {
+                throw new TooBusyException("too many events on one day");
+            } else {
+                eventList.add(newEvent);
+                JSONObject eventObject = createJsonObject(newEvent);
+                eventJson.add(eventObject);
+            }
+        } catch (TooBusyException e) {
+            System.out.println("cannot add");
+//            eventList.remove(eventList.size() - 1);
+//            eventJson.remove(eventJson.size() - 1);
+        } finally {
+            System.out.println("add process complete");
+        }
+    }
+
+    private JSONObject createJsonObject(Event newEvent) {
         JSONObject eventDetails = new JSONObject();
-        eventDetails.put("name", newEvent.name);
-        eventDetails.put("location", newEvent.location);
-        eventDetails.put("time", newEvent.date);
+        eventDetails.put("name", newEvent.getEventName());
+        eventDetails.put("location", newEvent.getEventLocation());
+//        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+//        String strDate = dateFormat.format(newEvent.date);
+//        eventDetails.put("time", strDate);
+        eventDetails.put("time", newEvent.getEventDate());
 
         JSONObject eventObject = new JSONObject();
         eventObject.put("event", eventDetails);
 
-        eventJson.add(eventObject);
+        return eventObject;
+    }
+
+
+    private Boolean dupeCheck(Event newEvent) {
+        boolean dupe = false;
+        for (int i = 0; i < eventList.size(); i++) {
+            if (eventList.get(i).getEventDate() == newEvent.getEventDate()) {
+                dupe = true;
+            }
+        }
+
+        return dupe;
     }
 
 }

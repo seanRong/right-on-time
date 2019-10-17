@@ -6,7 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,12 +19,17 @@ public class TestSaveLoad {
     private ArrayList<OneTimeEvent> testEventList;
     private OneTimeEvent event;
     private OneTimeEvent anotherEvent;
+    private String defaultDateRaw = "31/12/1998";
+    Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
+
+    public TestSaveLoad() throws ParseException {
+    }
 
     @BeforeEach
     void runBefore() {
         testEventList = new ArrayList<OneTimeEvent>();
-        event = new OneTimeEvent("test event", 20, 2000);
-        anotherEvent = new OneTimeEvent("second event", 25, 4500);
+        event = new OneTimeEvent("test event", defaultDate, 2000);
+        anotherEvent = new OneTimeEvent("second event", defaultDate, 4500);
         eventManagerTest = new EventManager();
     }
 

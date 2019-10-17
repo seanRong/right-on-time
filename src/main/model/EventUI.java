@@ -1,13 +1,14 @@
 package model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public interface EventUI {
-    void enterEvents();
+    void enterEvents() throws ParseException, TooBusyException;
 
-    void enterEvent();
+    void enterEvent() throws ParseException, TooBusyException;
 
-    Event makeEvent();
+    Event makeEvent() throws ParseException, TooBusyException;
 
 
 }
