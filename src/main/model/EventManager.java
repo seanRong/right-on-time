@@ -5,10 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -61,7 +58,8 @@ public class EventManager implements Loadable, Saveable {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Nothing to read. Initializing new save.");
+            eventJson = new JSONArray();
         }
     }
 
@@ -108,15 +106,18 @@ public class EventManager implements Loadable, Saveable {
     public void addEvent(Event newEvent) {
         try {
             dupeCheck(newEvent);
+            absurdTimeChecker(newEvent.getEventDate());
             eventList.add(newEvent);
             JSONObject eventObject = createJsonObject(newEvent);
             eventJson.add(eventObject);
         } catch (TooBusyException e) {
-            System.out.println("cannot add");
+            System.out.println(e);
 //            eventList.remove(eventList.size() - 1);
 //            eventJson.remove(eventJson.size() - 1);
+        } catch (AbsurdTimeException e) {
+            System.out.println(e);
         } finally {
-            System.out.println("add process complete");
+            System.out.println("exiting add protocol");
         }
     }
 
@@ -143,9 +144,16 @@ public class EventManager implements Loadable, Saveable {
                 dupe = true;
             }
         }
-
         if (dupe) {
-            throw new TooBusyException("too many events on one day");
+            throw new TooBusyException("Too many events on one day");
+        }
+    }
+
+    public void absurdTimeChecker(Date d) throws AbsurdTimeException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date curr = new Date();
+        if (d.compareTo(curr) < 0) {
+            throw new AbsurdTimeException("Cannot go back in time");
         }
     }
 

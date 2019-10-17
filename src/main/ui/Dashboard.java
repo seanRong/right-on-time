@@ -81,45 +81,47 @@ public class Dashboard implements EventUI {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-
-    public Event makeEvent() throws ParseException, TooBusyException {
+    public Event makeEvent() throws ParseException {
         EventInterface newEvent = new OneTimeEvent("", defaultDate, 0);
         System.out.println("Please enter event title");
-        String title = scanner.nextLine();
-        ((Event) newEvent).name = title;
+        ((Event) newEvent).name = scanner.nextLine();
         System.out.println("Please enter event date dd/MM/yyyy");
         String rawDate = scanner.nextLine();
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
-        int location = scanner.nextInt();
-        ((Event) newEvent).location = location;
+        ((Event) newEvent).location = scanner.nextInt();
         scanner.nextLine();
 
-        eventManager.addEvent((Event) newEvent);
-        System.out.println("added one time event");
-
-
+        try {
+            eventManager.dupeCheck((Event) newEvent);
+            eventManager.addEvent((Event) newEvent);
+            System.out.println("added one time event");
+        } catch (TooBusyException e) {
+            System.out.println("failed to add");
+        }
         return (Event) newEvent;
     }
 
-    public Event makeEventRepeated() throws ParseException, TooBusyException {
+    public Event makeEventRepeated() throws ParseException {
         EventInterface newEvent = new RepeatedEvent("", defaultDate,0);
         System.out.println("Please enter event title");
-        String title = scanner.nextLine();
-        ((Event) newEvent).name = title;
+        ((Event) newEvent).name = scanner.nextLine();
         System.out.println("Please enter event date dd/MM/yyyy");
         String rawDate = scanner.nextLine();
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         ((Event) newEvent).date = date;
         System.out.println("Please enter event location");
-        int location = scanner.nextInt();
-        ((Event) newEvent).location = location;
+        ((Event) newEvent).location = scanner.nextInt();
         scanner.nextLine();
 
-        eventManager.addEvent((Event) newEvent);
-        System.out.println("added repeated event");
-
+        try {
+            eventManager.dupeCheck((Event) newEvent);
+            eventManager.addEvent((Event) newEvent);
+            System.out.println("added repeated event");
+        } catch (TooBusyException e) {
+            System.out.println("failed to add");
+        }
         return (Event) newEvent;
     }
 
@@ -142,7 +144,6 @@ public class Dashboard implements EventUI {
             } else {
                 editEventLocation();
             }
-
         } else {
             System.out.println("cannot find event of that name");
         }

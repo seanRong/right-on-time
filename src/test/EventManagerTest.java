@@ -1,8 +1,5 @@
-import model.Event;
+import model.*;
 
-import model.EventManager;
-import model.OneTimeEvent;
-import model.TooBusyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +17,7 @@ public class EventManagerTest {
     private OneTimeEvent anotherEvent;
     private String defaultDateRaw = "31/12/1998";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
-    private String secondDateRaw = "13/12/1998";
+    private String secondDateRaw = "13/12/2020";
     Date secondDate = new SimpleDateFormat("dd/MM/yyyy").parse(secondDateRaw);
 
     public EventManagerTest() throws ParseException {
@@ -75,6 +72,21 @@ public class EventManagerTest {
 //            eventManagerTest.addEvent(event);
             fail("I was expecting TooBusyException!");
         } catch (TooBusyException e) {
+        }
+    }
+
+    @Test
+    void testAbsurdTimeException() {
+        try {
+            eventManagerTest.absurdTimeChecker(anotherEvent.getEventDate());
+        } catch (AbsurdTimeException e) {
+            fail("don't exception here");
+        }
+
+        try {
+            eventManagerTest.absurdTimeChecker(event.getEventDate());
+            fail("exception missed");
+        } catch (AbsurdTimeException e) {
         }
     }
 
