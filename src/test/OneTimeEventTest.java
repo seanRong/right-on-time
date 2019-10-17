@@ -1,16 +1,17 @@
 import model.Event;
 
+import model.OneTimeEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EventTest {
-    private Event eventTest;
+public class OneTimeEventTest {
+    private OneTimeEvent eventTest;
 
     @BeforeEach
     void runBefore() {
-        eventTest = new Event("some name", 10, 2000);
+        eventTest = new OneTimeEvent("some name", 10, 2000);
     }
 
     @Test
@@ -33,4 +34,19 @@ public class EventTest {
         assertEquals("some name on 10 at 2000", eventTest.getEventDetails());
     }
 
+    @Test
+    void testGetPriority() {
+        assertEquals("low", eventTest.getPriority());
+    }
+
+    @Test
+    void testSetPriority() {
+        eventTest.setPriority("high");
+        assertEquals( "high", eventTest.getPriority());
+    }
+
+    @Test
+    void testGetType() {
+        assertEquals(eventTest.getEventType(), "one time");
+    }
 }
