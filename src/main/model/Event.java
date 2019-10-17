@@ -5,7 +5,7 @@ import java.util.Date;
 
 public abstract class Event implements EventInterface {
     public String name;
-    public int date;
+    public int date; //will be actual date
     public long location; //will be coordinates
 
     // Constructs an event
