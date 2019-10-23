@@ -43,6 +43,7 @@ public class EventManager implements Loadable, Saveable {
     }
 
     public void load() {
+        //json-simple library
         JSONParser jsonParser = new JSONParser();
 
         try (FileReader reader = new FileReader("schedule.json")) {
@@ -64,6 +65,7 @@ public class EventManager implements Loadable, Saveable {
     }
 
     public void save() {
+        //json-simple library
         //Write JSON file
         try (FileWriter file = new FileWriter("schedule.json")) {
 

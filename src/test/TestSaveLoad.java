@@ -34,7 +34,7 @@ public class TestSaveLoad {
     }
 
     @Test
-    void testSave() throws IOException {
+    void testSave() {
         JSONArray eventJson = new JSONArray();
 
         JSONObject eventDetails = new JSONObject();

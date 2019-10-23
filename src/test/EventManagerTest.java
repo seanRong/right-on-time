@@ -15,10 +15,13 @@ public class EventManagerTest {
     private ArrayList<Event> testEventList;
     private OneTimeEvent event;
     private OneTimeEvent anotherEvent;
-    private String defaultDateRaw = "31/12/1998";
+    private RepeatedEvent thirdEvent;
+    private String defaultDateRaw = "31/12/2098";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
     private String secondDateRaw = "13/12/2020";
     Date secondDate = new SimpleDateFormat("dd/MM/yyyy").parse(secondDateRaw);
+    private String thirdDateRaw = "13/12/1998";
+    Date thirdDate = new SimpleDateFormat("dd/MM/yyyy").parse(thirdDateRaw);
 
     public EventManagerTest() throws ParseException {
     }
@@ -29,6 +32,7 @@ public class EventManagerTest {
         testEventList = new ArrayList<Event>();
         event = new OneTimeEvent("test event", defaultDate, 2000);
         anotherEvent = new OneTimeEvent("second event", secondDate, 4500);
+        thirdEvent = new RepeatedEvent("third event", thirdDate, 2000);
     }
 
     @Test
@@ -50,10 +54,10 @@ public class EventManagerTest {
 
     @Test
     void testSave() throws TooBusyException {
-        eventManagerTest.addEvent(event);
+        eventManagerTest.addEvent(anotherEvent);
         eventManagerTest.save();
         eventManagerTest.load();
-        assertTrue(eventManagerTest.getEventList().contains(event));
+        assertTrue(eventManagerTest.getEventList().contains(anotherEvent));
     }
 
     @Test
@@ -84,7 +88,7 @@ public class EventManagerTest {
         }
 
         try {
-            eventManagerTest.absurdTimeChecker(event.getEventDate());
+            eventManagerTest.absurdTimeChecker(thirdEvent.getEventDate());
             fail("exception missed");
         } catch (AbsurdTimeException e) {
         }
