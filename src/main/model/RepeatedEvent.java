@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Date;
+
 public class RepeatedEvent extends Event {
     public String repeatInterval;
 
-    public RepeatedEvent(String eventName, int eventDate, long eventLocation) {
+    public RepeatedEvent(String eventName, Date eventDate, long eventLocation) {
         super(eventName, eventDate, eventLocation);
         this.repeatInterval = "daily";
     }

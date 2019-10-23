@@ -5,13 +5,13 @@ import java.util.Date;
 
 public abstract class Event implements EventInterface {
     public String name;
-    public int date;
+    public Date date;
     public long location; //will be coordinates
 
     // Constructs an event
     //MODIFIES: this
     // EFFECTS: event has name eventName, date eventDate, location eventLocation
-    public Event(String eventName, int eventDate, long eventLocation) {
+    public Event(String eventName, Date eventDate, long eventLocation) {
         this.name = eventName;
         this.date = eventDate;
         this.location = eventLocation;
@@ -23,7 +23,7 @@ public abstract class Event implements EventInterface {
     }
 
     //EFFECTS: returns the int of the event's date
-    public int getEventDate() {
+    public Date getEventDate() {
         return this.date;
     }
 

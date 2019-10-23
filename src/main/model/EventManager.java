@@ -5,10 +5,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class EventManager implements Loadable, Saveable {
@@ -44,6 +43,7 @@ public class EventManager implements Loadable, Saveable {
     }
 
     public void load() {
+        //json-simple library
         JSONParser jsonParser = new JSONParser();
 
         try (FileReader reader = new FileReader("schedule.json")) {
@@ -59,11 +59,13 @@ public class EventManager implements Loadable, Saveable {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.out.println("Nothing to read. Initializing new save.");
+            eventJson = new JSONArray();
         }
     }
 
     public void save() {
+        //json-simple library
         //Write JSON file
         try (FileWriter file = new FileWriter("schedule.json")) {
 
@@ -94,26 +96,67 @@ public class EventManager implements Loadable, Saveable {
         eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
 
         System.out.println("new entries this session: ");
-        StringBuffer toPrint = new StringBuffer();
+        StringBuilder toPrint = new StringBuilder();
 
-        for (int i = 0; i < eventList.size(); i++) {
-            toPrint.append(eventList.get(i).getEventDetails());
+        for (Event event : eventList) {
+            toPrint.append(event.getEventDetails());
         }
 
         return toPrint.toString();
     }
 
     public void addEvent(Event newEvent) {
-        eventList.add(newEvent);
+        try {
+            dupeCheck(newEvent);
+            absurdTimeChecker(newEvent.getEventDate());
+            eventList.add(newEvent);
+            JSONObject eventObject = createJsonObject(newEvent);
+            eventJson.add(eventObject);
+        } catch (TooBusyException e) {
+            System.out.println(e);
+//            eventList.remove(eventList.size() - 1);
+//            eventJson.remove(eventJson.size() - 1);
+        } catch (AbsurdTimeException e) {
+            System.out.println(e);
+        } finally {
+            System.out.println("exiting add protocol");
+        }
+    }
+
+    private JSONObject createJsonObject(Event newEvent) {
         JSONObject eventDetails = new JSONObject();
-        eventDetails.put("name", newEvent.name);
-        eventDetails.put("location", newEvent.location);
-        eventDetails.put("time", newEvent.date);
+        eventDetails.put("name", newEvent.getEventName());
+        eventDetails.put("location", newEvent.getEventLocation());
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String strDate = dateFormat.format(newEvent.date);
+        eventDetails.put("time", strDate);
+//        eventDetails.put("time", newEvent.getEventDate());
 
         JSONObject eventObject = new JSONObject();
         eventObject.put("event", eventDetails);
 
-        eventJson.add(eventObject);
+        return eventObject;
+    }
+
+
+    public void dupeCheck(Event newEvent) throws TooBusyException {
+        boolean dupe = false;
+        for (int i = 0; i < eventList.size(); i++) {
+            if (eventList.get(i).getEventDate().equals(newEvent.getEventDate())) {
+                dupe = true;
+            }
+        }
+        if (dupe) {
+            throw new TooBusyException("Too many events on one day");
+        }
+    }
+
+    public void absurdTimeChecker(Date d) throws AbsurdTimeException {
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date curr = new Date();
+        if (d.compareTo(curr) < 0) {
+            throw new AbsurdTimeException("Cannot go back in time");
+        }
     }
 
 }
