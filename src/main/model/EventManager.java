@@ -14,7 +14,7 @@ public class EventManager implements Loadable, Saveable {
     private ArrayList<Event> eventList;
     private JSONArray eventJson;
     public ClassSchedule classSchedule;
-    HashMap<String, Event> fastLookup = new HashMap<String, Event>();
+    public HashMap<String, Event> fastLookup = new HashMap<String, Event>();
 
     public EventManager() {
         eventList = new ArrayList<Event>();
@@ -127,10 +127,9 @@ public class EventManager implements Loadable, Saveable {
             eventList.add(newEvent);
             JSONObject eventObject = createJsonObject(newEvent);
             eventJson.add(eventObject);
+            fastLookup.put(newEvent.name, newEvent);
         } catch (TooBusyException e) {
             System.out.println(e);
-//            eventList.remove(eventList.size() - 1);
-//            eventJson.remove(eventJson.size() - 1);
         } catch (AbsurdTimeException e) {
             System.out.println(e);
         } finally {

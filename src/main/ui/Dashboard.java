@@ -27,9 +27,8 @@ public class Dashboard implements EventUI {
     // Logic for adding events
     // EFFECTS: infinite loop that takes user input and passes input to resolver
     public void enterEvents() throws ParseException, TooBusyException {
-        String choice = "";
         System.out.println("Enter 'add' to add event, 'edit' to edit existing event, or 'done' to exit");
-        choice = scanner.nextLine();
+        String choice = scanner.nextLine();
         System.out.println("you selected: " + choice);
         resolveChoice(choice);
     }
@@ -48,7 +47,7 @@ public class Dashboard implements EventUI {
                 System.exit(0);
                 break;
             case "edit":
-                System.out.println("edit mode TODO");
+                editMode();
                 enterEvents();
                 break;
             default:
@@ -62,9 +61,8 @@ public class Dashboard implements EventUI {
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
     public void enterEvent() throws ParseException {
-        String choice = "";
         System.out.println("Enter 'r' for repeated, 'o' for one-time, 's' for school");
-        choice = scanner.nextLine();
+        String choice = scanner.nextLine();
         System.out.println("you selected: " + choice);
         if (choice.equals("o")) {
             Event newEvent = makeEvent();
@@ -144,37 +142,42 @@ public class Dashboard implements EventUI {
         return (Event) newEvent;
     }
 
+    public void editMode() {
+        System.out.println("edit mode. enter query");
+        String query = scanner.nextLine();
+        editEventByName(query);
+    }
+
     // REQUIRES: an event with the given name
     // MODIFIES: the selected event
     // EFFECTS: gives user ability to change the location and date of said event
-    public void editEventByName(ArrayList<Event> eventList, String eventName) {
-        ArrayList<String> eventNames;
-        eventNames = new ArrayList<String>();
-        for (int i = 0; i < eventList.size(); i++) {
-            eventNames.add(eventList.get(i).getEventName());
-        }
-        if (eventNames.contains(eventName)) {
+    public void editEventByName(String eventName) {
+        Event found = eventManager.fastLookup.get(eventName);
+        if (!(found == null)) {
             System.out.println("set new date or location?");
             String choice = scanner.nextLine();
             System.out.println("you selected: " + choice);
             if (choice.equals("date")) {
-                editEventDate();
+                editEventDate(found);
             } else {
-                editEventLocation();
+                editEventLocation(found);
             }
         } else {
             System.out.println("cannot find event of that name");
+            System.out.println(eventManager.fastLookup);
         }
     }
 
     // MODIFIES: given event's date
-    private void editEventDate() {
-        System.out.println("todo");
+    private void editEventDate(Event e) {
+        System.out.println("current date");
+        System.out.println(e.date);
     }
 
     // MODIFIES: given event's location
-    private void editEventLocation() {
-        System.out.println("todo");
+    private void editEventLocation(Event e) {
+        System.out.println("current location");
+        System.out.println(e.location);
     }
 
 

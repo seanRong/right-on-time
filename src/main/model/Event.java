@@ -41,4 +41,21 @@ public abstract class Event implements EventInterface {
         return "no type specified";
     }
 
+
+    //some cred to GeeksForGeeks.org
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        Event event = (Event) obj;
+
+        return (event.name.equals(this.name)  && event.location == this.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
 }
