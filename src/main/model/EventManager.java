@@ -13,11 +13,12 @@ import java.util.*;
 public class EventManager implements Loadable, Saveable {
     private ArrayList<Event> eventList;
     private JSONArray eventJson;
-
+    public ClassSchedule classSchedule;
 
     public EventManager() {
         eventList = new ArrayList<Event>();
         JSONArray eventJson = new JSONArray();
+        classSchedule = new ClassSchedule();
         this.eventJson = eventJson;
         load();
     }
@@ -102,7 +103,20 @@ public class EventManager implements Loadable, Saveable {
             toPrint.append(event.getEventDetails());
         }
 
+        System.out.println("school entries");
+        System.out.println(dumpSchoolSchedule(classSchedule));
+
         return toPrint.toString();
+    }
+
+
+    public String dumpSchoolSchedule(ClassSchedule classSchedule) {
+        String toPrint = "";
+
+        for (int i = 0; i < classSchedule.getSize(); i++) {
+            toPrint += classSchedule.getEvent(i).name;
+        }
+        return toPrint;
     }
 
     public void addEvent(Event newEvent) {

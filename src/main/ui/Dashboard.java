@@ -63,15 +63,19 @@ public class Dashboard implements EventUI {
     // EFFECTS: shows the user what they just added
     public void enterEvent() throws ParseException {
         String choice = "";
-        System.out.println("Enter 'r' for repeated, 'o' for one-time");
+        System.out.println("Enter 'r' for repeated, 'o' for one-time, 's' for school");
         choice = scanner.nextLine();
         System.out.println("you selected: " + choice);
         if (choice.equals("o")) {
             Event newEvent = makeEvent();
             System.out.println("event added, it's called: ");
             System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
-        } else {
+        } else if (choice.equals("r")) {
             Event newEvent = makeEventRepeated();
+            System.out.println("event added, it's called: ");
+            System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
+        } else {
+            Event newEvent = makeEventSchool();
             System.out.println("event added, it's called: ");
             System.out.println(newEvent.name + " on " + newEvent.date + " at " + newEvent.location);
         }
@@ -124,6 +128,21 @@ public class Dashboard implements EventUI {
         return (Event) newEvent;
     }
 
+    public Event makeEventSchool() throws ParseException {
+        ClassEvent newEvent = new ClassEvent("", defaultDate,0);
+        System.out.println("Please enter event title");
+        ((Event) newEvent).name = scanner.nextLine();
+        System.out.println("Please enter event date dd/MM/yyyy");
+        String rawDate = scanner.nextLine();
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
+        ((Event) newEvent).date = date;
+        System.out.println("Please enter event location");
+        ((Event) newEvent).location = scanner.nextInt();
+        scanner.nextLine();
+
+        newEvent.setSchedule(eventManager.classSchedule);
+        return (Event) newEvent;
+    }
 
     // REQUIRES: an event with the given name
     // MODIFIES: the selected event
@@ -157,6 +176,7 @@ public class Dashboard implements EventUI {
     private void editEventLocation() {
         System.out.println("todo");
     }
+
 
     // EFFECTS: starts program by making a new dashboard
     public static void main(String[] args) throws ParseException, TooBusyException {
