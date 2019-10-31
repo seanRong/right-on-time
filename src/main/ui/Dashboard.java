@@ -1,7 +1,6 @@
 package ui;
 
 import model.*;
-import org.json.simple.JSONObject;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -62,7 +61,7 @@ public class Dashboard implements EventUI {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-    public void enterEvent() throws ParseException, TooBusyException {
+    public void enterEvent() throws ParseException {
         String choice = "";
         System.out.println("Enter 'r' for repeated, 'o' for one-time");
         choice = scanner.nextLine();
