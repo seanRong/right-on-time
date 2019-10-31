@@ -14,6 +14,7 @@ public class EventManager implements Loadable, Saveable {
     private ArrayList<Event> eventList;
     private JSONArray eventJson;
     public ClassSchedule classSchedule;
+    HashMap<String, Event> fastLookup = new HashMap<String, Event>();
 
     public EventManager() {
         eventList = new ArrayList<Event>();
