@@ -20,16 +20,8 @@ public class MakeEventUI {
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
     public void makeOneTimeEvent() throws ParseException {
-        Activity newEvent = new OneTimeEvent("", defaultDate, 0);
-        System.out.println("Please enter event title");
-        ((Event) newEvent).name = scanner.nextLine();
-        System.out.println("Please enter event date dd/MM/yyyy");
-        String rawDate = scanner.nextLine();
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
-        ((Event) newEvent).date = date;
-        System.out.println("Please enter event location");
-        ((Event) newEvent).location = scanner.nextInt();
-        scanner.nextLine();
+        Event newEvent = new OneTimeEvent("", defaultDate, 0);
+        newEvent = setEventDetails(newEvent);
 
         try {
             eventManager.dupeCheck((Event) newEvent);
@@ -42,16 +34,8 @@ public class MakeEventUI {
     }
 
     public void makeEventRepeated() throws ParseException {
-        Activity newEvent = new RepeatedEvent("", defaultDate,0);
-        System.out.println("Please enter event title");
-        ((Event) newEvent).name = scanner.nextLine();
-        System.out.println("Please enter event date dd/MM/yyyy");
-        String rawDate = scanner.nextLine();
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
-        ((Event) newEvent).date = date;
-        System.out.println("Please enter event location");
-        ((Event) newEvent).location = scanner.nextInt();
-        scanner.nextLine();
+        Event newEvent = new RepeatedEvent("", defaultDate,0);
+        newEvent = setEventDetails(newEvent);
 
         try {
             eventManager.dupeCheck((Event) newEvent);
@@ -65,32 +49,24 @@ public class MakeEventUI {
 
     public void makeEventSchool() throws ParseException {
         ClassEvent newEvent = new ClassEvent("", defaultDate,0);
-        System.out.println("Please enter event title");
-        ((Event) newEvent).name = scanner.nextLine();
-        System.out.println("Please enter event date dd/MM/yyyy");
-        String rawDate = scanner.nextLine();
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
-        ((Event) newEvent).date = date;
-        System.out.println("Please enter event location");
-        ((Event) newEvent).location = scanner.nextInt();
-        scanner.nextLine();
+        newEvent = (ClassEvent) setEventDetails(newEvent);
 
         newEvent.setSchedule(eventManager.classSchedule);
         eventMade(newEvent);
     }
 
-//    public Event setEventDetails(Event newEvent) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Please enter event title");
-//        newEvent.name = scanner.nextLine();
-//        System.out.println("Please enter event date dd/MM/yyyy");
-//        String rawDate = scanner.nextLine();
-//        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
-//        newEvent.date = date;
-//        System.out.println("Please enter event location");
-//        newEvent.location = scanner.nextInt();
-//        scanner.nextLine();
-//    }
+    public Event setEventDetails(Event newEvent) throws ParseException {
+        System.out.println("Please enter event title");
+        newEvent.name = scanner.nextLine();
+        System.out.println("Please enter event date dd/MM/yyyy");
+        String rawDate = scanner.nextLine();
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
+        newEvent.date = date;
+        System.out.println("Please enter event location");
+        newEvent.location = scanner.nextInt();
+        scanner.nextLine();
+        return newEvent;
+    }
 
     public void eventMade(Activity newEvent) {
         System.out.println("event added, it's called: ");

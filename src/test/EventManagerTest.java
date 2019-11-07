@@ -33,6 +33,8 @@ public class EventManagerTest {
         event = new OneTimeEvent("test event", defaultDate, 2000);
         anotherEvent = new OneTimeEvent("second event", secondDate, 4500);
         thirdEvent = new RepeatedEvent("third event", thirdDate, 2000);
+        ClassSchedule classSchedule = new ClassSchedule();
+        ClassEvent classEvent = new ClassEvent("school", defaultDate, 666);
     }
 
     @Test
@@ -50,6 +52,15 @@ public class EventManagerTest {
     void testDumpSchedule() {
         testEventList.add(event);
         assertEquals("test event on 20 at 2000", eventManagerTest.dumpSchedule());
+    }
+
+    @Test
+    void testDumpSchool() {
+        ClassEvent classEvent = new ClassEvent("school", defaultDate, 666);
+        ClassSchedule classSchedule = new ClassSchedule();
+        classSchedule.addClass(classEvent);
+        eventManagerTest.getClassSchedule().addClass(classEvent);
+        assertEquals(classSchedule.printableSchedule(), eventManagerTest.dumpSchoolSchedule());
     }
 
     @Test

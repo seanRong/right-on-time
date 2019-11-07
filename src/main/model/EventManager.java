@@ -15,7 +15,7 @@ public class EventManager implements Loadable, Saveable {
     private SaveModule saveModule = new SaveModule();
 
     public EventManager() {
-        this.eventList = new ArrayList<Event>();
+        this.eventList = new ArrayList<>();
         JSONArray eventJson = new JSONArray();
         classSchedule = new ClassSchedule();
         this.eventJson = eventJson;

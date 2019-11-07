@@ -28,4 +28,11 @@ public class ClassScheduleTest {
         cs.removeClass(ce);
         assertEquals(0, cs.getSize());
     }
+
+    @Test
+    void testPrintable() {
+        cs.addClass(ce);
+        cs.removeClass(ce);
+        assertEquals(ce.getEventDetails(), cs.printableSchedule());
+    }
 }
