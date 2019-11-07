@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public interface EventInterface {
+public interface Activity {
     String getEventName();
 
     Date getEventDate();

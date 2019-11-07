@@ -1,9 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class Event implements EventInterface {
+public abstract class Event implements Activity {
     public String name;
     public Date date;
     public long location; //will be coordinates
@@ -54,8 +53,9 @@ public abstract class Event implements EventInterface {
         return (event.name.equals(this.name) && event.location == this.location);
     }
 
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
-    }
+//    not necessary
+//    @Override
+//    public int hashCode() {
+//        return this.name.hashCode();
+//    }
 }

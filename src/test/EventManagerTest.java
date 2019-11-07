@@ -49,7 +49,7 @@ public class EventManagerTest {
     @Test
     void testDumpSchedule() {
         testEventList.add(event);
-        assertEquals("test event on 20 at 2000", eventManagerTest.dumpSchedule(testEventList));
+        assertEquals("test event on 20 at 2000", eventManagerTest.dumpSchedule());
     }
 
     @Test

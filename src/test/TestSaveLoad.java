@@ -61,7 +61,7 @@ public class TestSaveLoad {
         JSONObject eventObject = new JSONObject();
         eventObject.put("event", eventDetails);
 
-        String parsedObj = eventManagerTest.parseEventJson((JSONObject) eventObject);
+        String parsedObj = eventManagerTest.getSaveModule().parseEventJson((JSONObject) eventObject);
 
         String expected = "test event on 20 at 2000";
         assertEquals(expected, parsedObj);

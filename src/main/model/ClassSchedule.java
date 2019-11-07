@@ -24,4 +24,12 @@ public class ClassSchedule {
     public Event getEvent(int index) {
         return schedule.get(index);
     }
+
+    public String printableSchedule() {
+        String toPrint = "";
+        for (Event e: schedule) {
+            toPrint += e.getEventDetails();
+        }
+        return toPrint;
+    }
 }
