@@ -50,8 +50,8 @@ public abstract class Event implements EventInterface {
         }
 
         Event event = (Event) obj;
-
-        return (event.name.equals(this.name)  && event.location == this.location);
+        //no date equality though
+        return (event.name.equals(this.name) && event.location == this.location);
     }
 
     @Override
