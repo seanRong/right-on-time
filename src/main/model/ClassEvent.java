@@ -9,6 +9,10 @@ public class ClassEvent extends RepeatedEvent {
         super(eventName, eventDate, eventLocation);
     }
 
+    public ClassSchedule getClassSchedule() {
+        return this.cs;
+    }
+
     public void setSchedule(ClassSchedule cs) {
         if (this.cs != null) {
             this.cs.removeClass(this);
