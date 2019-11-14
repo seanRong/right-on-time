@@ -1,11 +1,12 @@
 package model;
 
+import java.awt.geom.Point2D;
 import java.util.Date;
 
 public class ClassEvent extends RepeatedEvent {
     private ClassSchedule cs;
 
-    public ClassEvent(String eventName, Date eventDate, long eventLocation) {
+    public ClassEvent(String eventName, Date eventDate, Point2D.Double eventLocation) {
         super(eventName, eventDate, eventLocation);
     }
 

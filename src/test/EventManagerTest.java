@@ -3,6 +3,7 @@ import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Point2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class EventManagerTest {
     Date secondDate = new SimpleDateFormat("dd/MM/yyyy").parse(secondDateRaw);
     private String thirdDateRaw = "13/12/1998";
     Date thirdDate = new SimpleDateFormat("dd/MM/yyyy").parse(thirdDateRaw);
+    Point2D.Double point = new Point2D.Double(2000, 2000);
+    Point2D.Double pointTwo = new Point2D.Double(4500, 4500);
+
 
     public EventManagerTest() throws ParseException {
     }
@@ -30,11 +34,11 @@ public class EventManagerTest {
     void runBefore() {
         eventManagerTest = new EventManager();
         testEventList = new ArrayList<Event>();
-        event = new OneTimeEvent("test event", defaultDate, 2000);
-        anotherEvent = new OneTimeEvent("second event", secondDate, 4500);
-        thirdEvent = new RepeatedEvent("third event", thirdDate, 2000);
+        event = new OneTimeEvent("test event", defaultDate, point);
+        anotherEvent = new OneTimeEvent("second event", secondDate, pointTwo);
+        thirdEvent = new RepeatedEvent("third event", thirdDate, point);
         ClassSchedule classSchedule = new ClassSchedule();
-        ClassEvent classEvent = new ClassEvent("school", defaultDate, 666);
+        ClassEvent classEvent = new ClassEvent("school", defaultDate, pointTwo);
     }
 
     @Test
@@ -56,7 +60,7 @@ public class EventManagerTest {
 
     @Test
     void testDumpSchool() {
-        ClassEvent classEvent = new ClassEvent("school", defaultDate, 666);
+        ClassEvent classEvent = new ClassEvent("school", defaultDate, pointTwo);
         ClassSchedule classSchedule = new ClassSchedule();
         classSchedule.addClass(classEvent);
         eventManagerTest.getClassSchedule().addClass(classEvent);

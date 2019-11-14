@@ -52,7 +52,7 @@ public class SaveModule {
     public JSONObject createJsonObject(Event newEvent) {
         JSONObject eventDetails = new JSONObject();
         eventDetails.put("name", newEvent.getEventName());
-        eventDetails.put("location", newEvent.getEventLocation());
+        eventDetails.put("location", newEvent.getEventLocation().getX() + "," + newEvent.getEventLocation().getY());
         DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
         String strDate = dateFormat.format(newEvent.date);
         eventDetails.put("time", strDate);

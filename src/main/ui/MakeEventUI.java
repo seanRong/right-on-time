@@ -2,11 +2,13 @@ package ui;
 
 import model.*;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class MakeEventUI {
+    private Point2D.Double defaultPoint = new Point2D.Double(0.0, 0.0);
     private String defaultDateRaw = "31/12/1998";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
     Scanner scanner = new Scanner(System.in);
@@ -20,7 +22,7 @@ public class MakeEventUI {
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
     public void makeOneTimeEvent() throws ParseException {
-        Event newEvent = new OneTimeEvent("", defaultDate, 0);
+        Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent);
 
         try {
@@ -34,7 +36,7 @@ public class MakeEventUI {
     }
 
     public void makeEventRepeated() throws ParseException {
-        Event newEvent = new RepeatedEvent("", defaultDate,0);
+        Event newEvent = new RepeatedEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent);
 
         try {
@@ -48,7 +50,7 @@ public class MakeEventUI {
     }
 
     public void makeEventSchool() throws ParseException {
-        ClassEvent newEvent = new ClassEvent("", defaultDate,0);
+        ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
         newEvent = (ClassEvent) setEventDetails(newEvent);
 
         newEvent.setSchedule(eventManager.classSchedule);
@@ -62,13 +64,13 @@ public class MakeEventUI {
         String rawDate = scanner.nextLine();
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         newEvent.date = date;
-        System.out.println("Please enter event location");
-        newEvent.location = scanner.nextInt();
+        System.out.println("Please enter event location (2 doubles seperated by space)");
+        newEvent.location = new Point2D.Double(scanner.nextDouble(), scanner.nextDouble());
         scanner.nextLine();
         return newEvent;
     }
 
-    public void eventMade(Activity newEvent) {
+    public void eventMade(Event newEvent) {
         System.out.println("event added, it's called: ");
         System.out.println(
                 newEvent.getEventName() + " on " + newEvent.getEventDate() + " at " + newEvent.getEventLocation());

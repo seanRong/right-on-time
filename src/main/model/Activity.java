@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.geom.Point2D;
 import java.util.Date;
 
 public interface Activity {
@@ -7,7 +8,7 @@ public interface Activity {
 
     Date getEventDate();
 
-    long getEventLocation();
+    Point2D.Double getEventLocation();
 
     String getEventDetails();
 }

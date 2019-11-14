@@ -4,6 +4,7 @@ import model.OneTimeEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Point2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OneTimeEventTest {
     private OneTimeEvent eventTest;
+    Point2D.Double point = new Point2D.Double(2000, 2000);
     private String defaultDateRaw = "31/12/1998";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
 
@@ -20,7 +22,7 @@ public class OneTimeEventTest {
 
     @BeforeEach
     void runBefore() {
-        eventTest = new OneTimeEvent("some name", defaultDate, 2000);
+        eventTest = new OneTimeEvent("some name", defaultDate, point);
     }
 
     @Test

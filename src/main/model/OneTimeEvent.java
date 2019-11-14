@@ -1,11 +1,12 @@
 package model;
 
+import java.awt.geom.Point2D;
 import java.util.Date;
 
 public class OneTimeEvent extends Event {
     public String priority;
 
-    public OneTimeEvent(String eventName, Date eventDate, long eventLocation) {
+    public OneTimeEvent(String eventName, Date eventDate, Point2D.Double eventLocation) {
         super(eventName, eventDate, eventLocation);
         this.priority = "low";
     }

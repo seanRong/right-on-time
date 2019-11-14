@@ -34,19 +34,18 @@ public class EditEventUI {
             System.out.println("cannot find event of that name");
             System.out.println(eventManager.fastLookup);
         }
+//        scanner.nextLine();
     }
 
     // MODIFIES: given event's date
     private void editEventDate(Event e) {
         System.out.println("current date");
         System.out.println(e.date);
-        scanner.close();
     }
 
     // MODIFIES: given event's location
     private void editEventLocation(Event e) {
         System.out.println("current location");
         System.out.println(e.location);
-        scanner.close();
     }
 }

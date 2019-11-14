@@ -1,1 +1,1 @@
-[{"event":{"name":"one","location":20,"time":"20-00-2000"}},{"event":{"name":"two","location":43,"time":"20-00-2020"}},{"event":{"name":"tester","location":55235,"time":"02-00-2100"}},{"event":{"name":"onetime tester","location":1234,"time":"07-00-2099"}},{"event":{"name":"second event","location":4500,"time":"13-00-2020"}},{"event":{"name":"second event","location":4500,"time":"13-00-2020"}}]
+[{"event":{"name":"test","location":"41.43206,-81.38992","time":"06-00-2100"}},{"event":{"name":"second","location":"49.263350,-123.254257","time":"06-00-2022"}}]

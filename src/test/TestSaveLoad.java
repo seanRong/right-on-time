@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,8 @@ public class TestSaveLoad {
     private OneTimeEvent anotherEvent;
     private String defaultDateRaw = "31/12/1998";
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
+    Point2D.Double point = new Point2D.Double(2000, 2000);
+
 
     public TestSaveLoad() throws ParseException {
     }
@@ -28,8 +31,8 @@ public class TestSaveLoad {
     @BeforeEach
     void runBefore() {
         testEventList = new ArrayList<OneTimeEvent>();
-        event = new OneTimeEvent("test event", defaultDate, 2000);
-        anotherEvent = new OneTimeEvent("second event", defaultDate, 4500);
+        event = new OneTimeEvent("test event", defaultDate, point);
+        anotherEvent = new OneTimeEvent("second event", defaultDate, point);
         eventManagerTest = new EventManager();
     }
 

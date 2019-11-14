@@ -1,16 +1,17 @@
 package model;
 
+import java.awt.geom.Point2D;
 import java.util.Date;
 
 public abstract class Event implements Activity {
     public String name;
     public Date date;
-    public long location; //will be coordinates
+    public Point2D.Double location; //will be coordinates
 
     // Constructs an event
     //MODIFIES: this
     // EFFECTS: event has name eventName, date eventDate, location eventLocation
-    public Event(String eventName, Date eventDate, long eventLocation) {
+    public Event(String eventName, Date eventDate, java.awt.geom.Point2D.Double eventLocation) {
         this.name = eventName;
         this.date = eventDate;
         this.location = eventLocation;
@@ -27,7 +28,7 @@ public abstract class Event implements Activity {
     }
 
     //EFFECTS: returns the long of the event's location
-    public long getEventLocation() {
+    public java.awt.geom.Point2D.Double getEventLocation() {
         return this.location;
     }
 
