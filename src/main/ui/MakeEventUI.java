@@ -13,6 +13,8 @@ public class MakeEventUI {
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
     Scanner scanner = new Scanner(System.in);
     EventManager eventManager;
+    SchoolEventObserver sco = new SchoolEventObserver();
+    EventObserver eo = new EventObserver();
 
     public MakeEventUI(EventManager eventManager) throws ParseException {
         this.eventManager = eventManager;
@@ -24,6 +26,7 @@ public class MakeEventUI {
     public void makeOneTimeEvent() throws ParseException {
         Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent);
+        newEvent.addObserver(eo);
 
         try {
             eventManager.dupeCheck((Event) newEvent);
@@ -38,10 +41,11 @@ public class MakeEventUI {
     public void makeEventRepeated() throws ParseException {
         Event newEvent = new RepeatedEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent);
+        newEvent.addObserver(eo);
 
         try {
-            eventManager.dupeCheck((Event) newEvent);
-            eventManager.addEvent((Event) newEvent);
+            eventManager.dupeCheck(newEvent);
+            eventManager.addEvent(newEvent);
             System.out.println("added repeated event");
         } catch (TooBusyException e) {
             System.out.println("failed to add");
@@ -52,12 +56,14 @@ public class MakeEventUI {
     public void makeEventSchool() throws ParseException {
         ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
         newEvent = (ClassEvent) setEventDetails(newEvent);
+        newEvent.addObserver(sco);
+        newEvent.addObserver(eo);
 
         newEvent.setSchedule(eventManager.classSchedule);
         eventMade(newEvent);
     }
 
-    public Event setEventDetails(Event newEvent) throws ParseException {
+    private Event setEventDetails(Event newEvent) throws ParseException {
         System.out.println("Please enter event title");
         newEvent.name = scanner.nextLine();
         System.out.println("Please enter event date dd/MM/yyyy");

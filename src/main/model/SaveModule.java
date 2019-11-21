@@ -24,7 +24,7 @@ public class SaveModule {
 
             eventJson = (JSONArray) obj;
             System.out.println("previous state");
-//            System.out.println(eventJson);
+            System.out.println(eventJson);
             eventJson.forEach(event -> System.out.println(parseEventJson((JSONObject) event)));
 
         } catch (IOException e) {

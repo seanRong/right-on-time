@@ -2,8 +2,9 @@ package model;
 
 import java.awt.geom.Point2D;
 import java.util.Date;
+import java.util.Observable;
 
-public abstract class Event implements Activity {
+public abstract class Event extends Observable implements Activity {
     public String name;
     public Date date;
     public Point2D.Double location; //will be coordinates
@@ -15,6 +16,14 @@ public abstract class Event implements Activity {
         this.name = eventName;
         this.date = eventDate;
         this.location = eventLocation;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setLocation(Point2D.Double point) {
+        this.location = point;
     }
 
     //EFFECTS: returns the string of the event's name
@@ -39,6 +48,11 @@ public abstract class Event implements Activity {
 
     public String getEventType() {
         return "no type specified";
+    }
+
+    public void notifyUp() {
+        setChanged();
+        notifyObservers();
     }
 
 

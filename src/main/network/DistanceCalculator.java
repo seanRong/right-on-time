@@ -1,6 +1,5 @@
 package network;
 
-import com.github.cliftonlabs.json_simple.JsonObject;
 import model.SaveModule;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,17 +9,19 @@ import org.json.simple.parser.ParseException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 //import static model.SaveModule.parseEventJson;
 
+
+//AIzaSyCi9MhJVXNBZLqEPyDIvzfrX7eRmvBZV4s
+
 //ex by  http://zetcode.com/articles/javareadwebpage/
 
 public class DistanceCalculator {
     private JSONArray eventJson;
-    private SaveModule saveModule;
+    private SaveModule saveModule;  //recover earlier plz
     private ArrayList<String> coordinates = new ArrayList<>();
     private static JSONParser parser = new JSONParser();
 
@@ -31,7 +32,7 @@ public class DistanceCalculator {
 //        System.out.println(findDistance());
     }
 
-    public void findDistance() throws IOException, ParseException {
+    private void findDistance() throws IOException {
         System.out.println("finding distance btwn first and others");
         eventJson.forEach(event -> coordinates.add(parseEventJsonLocation((JSONObject) event)));
         for (int i = 0; i < coordinates.size(); i++) {
@@ -51,7 +52,7 @@ public class DistanceCalculator {
         JSONObject json = null;
 
         try {
-            json = (JSONObject) parser.parse(sb.toString());
+            json = (JSONObject) parser.parse(sb);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -66,7 +67,7 @@ public class DistanceCalculator {
 
     }
 
-    public static String mapData(String firstLocation, String secondLocation) throws IOException {
+    private static String mapData(String firstLocation, String secondLocation) throws IOException {
         BufferedReader br = null;
 
         try {
@@ -93,3 +94,5 @@ public class DistanceCalculator {
         }
     }
 }
+
+

@@ -77,7 +77,7 @@ public class Dashboard implements EventManipulator {
     }
 
     //makes a new editEventUI and puts you into editMode
-    public void editMode() {
+    public void editMode() throws ParseException {
         EditEventUI editEventUI = new EditEventUI(this.eventManager);
     }
 

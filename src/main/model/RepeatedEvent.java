@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.Date;
 
 public class RepeatedEvent extends Event {
-    public String repeatInterval;
+    private String repeatInterval;
 
     public RepeatedEvent(String eventName, Date eventDate, Point2D.Double eventLocation) {
         super(eventName, eventDate, eventLocation);
