@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class Dashboard implements EventManipulator {
+public class Dashboard {
 
     private Scanner scanner;
     private EventManager eventManager;
@@ -42,7 +42,7 @@ public class Dashboard implements EventManipulator {
     private void resolveChoice(String choice) throws ParseException, TooBusyException {
         switch (choice) {
             case "add":
-                enterEvent();
+//                enterEvent();
                 modeChoice();
                 break;
             case "done":
@@ -62,19 +62,19 @@ public class Dashboard implements EventManipulator {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-    public void enterEvent() throws ParseException {
-        System.out.println("Enter 'r' for repeated, 'o' for one-time, 's' for school");
-        String choice = scanner.nextLine();
-        System.out.println("you selected: " + choice);
-        MakeEventUI makeEventUI = new MakeEventUI(this.eventManager);
-        if (choice.equals("o")) {
-            makeEventUI.makeOneTimeEvent();
-        } else if (choice.equals("r")) {
-            makeEventUI.makeEventRepeated();
-        } else {
-            makeEventUI.makeEventSchool();
-        }
-    }
+//    public void enterEvent() throws ParseException {
+//        System.out.println("Enter 'r' for repeated, 'o' for one-time, 's' for school");
+//        String choice = scanner.nextLine();
+//        System.out.println("you selected: " + choice);
+//        MakeEventUI makeEventUI = new MakeEventUI(this.eventManager);
+//        if (choice.equals("o")) {
+//            makeEventUI.makeOneTimeEvent();
+//        } else if (choice.equals("r")) {
+//            makeEventUI.makeEventRepeated();
+//        } else {
+//            makeEventUI.makeEventSchool();
+//        }
+//    }
 
     //makes a new editEventUI and puts you into editMode
     public void editMode() throws ParseException {

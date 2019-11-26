@@ -17,7 +17,7 @@ public class GUI extends Application {
 
     public GUI() throws ParseException {
         eventManager = new EventManager();
-//        makeEventUI = new MakeEventUI(eventManager);
+        makeEventUI = new MakeEventUI(eventManager);
 //        editEventUI = new EditEventUI(eventManager);
     }
 
@@ -28,6 +28,7 @@ public class GUI extends Application {
         Parent root = loader.load();
         Controller controller = loader.getController();
         controller.setGui(this);
+        System.out.println(controller.getGui());
         primaryStage.setTitle("Right On Time");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

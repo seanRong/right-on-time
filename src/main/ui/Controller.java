@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.awt.*;
+import java.text.ParseException;
 
 public class Controller {
     private GUI gui;
@@ -13,11 +14,16 @@ public class Controller {
     @FXML
     private TextField oneTimeDate;
     @FXML
-    private TextField oneTimeLocation;
-
+    private TextField oneTimeLat;
+    @FXML
+    private TextField oneTimeLong;
 
     public void setGui(GUI gui) {
         this.gui = gui;
+    }
+
+    public GUI getGui() {
+        return this.gui;
     }
 
     public void receiveInput(ActionEvent actionEvent) {
@@ -35,7 +41,15 @@ public class Controller {
     }
 
     public void makeEventOneTime(ActionEvent actionEvent) {
-//        System.out.println(oneTimeDate);
-        System.out.println(oneTimeName.getCharacters());
+        String name = oneTimeName.getCharacters().toString();
+        String date = oneTimeDate.getCharacters().toString();
+        String lat = oneTimeLat.getCharacters().toString();
+        String lon = oneTimeLong.getCharacters().toString();
+//        System.out.println(this.gui.getMakeEventUI());
+        try {
+            gui.getMakeEventUI().makeOneTimeEvent(name, date, lat, lon);
+        } catch (ParseException e) {
+            System.out.println("parse failed at controller");
+        }
     }
 }

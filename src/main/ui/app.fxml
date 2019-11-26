@@ -70,8 +70,9 @@
                                              <children>
                                                 <Button layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#makeEventOneTime" text="Make Event" />
                                                 <TextField fx:id="oneTimeName" layoutX="14.0" layoutY="27.0" promptText="Name" />
-                                                <TextField layoutX="14.0" layoutY="83.0" promptText="Date" />
-                                                <TextField layoutX="14.0" layoutY="136.0" promptText="Location" />
+                                                <TextField fx:id="oneTimeDate" layoutX="14.0" layoutY="71.0" promptText="Date" />
+                                                <TextField fx:id="oneTimeLat" layoutX="14.0" layoutY="121.0" promptText="Latitude" />
+                                                <TextField fx:id="oneTimeLong" layoutX="14.0" layoutY="164.0" promptText="Longitude" />
                                              </children>
                                           </AnchorPane>
                                     </content>

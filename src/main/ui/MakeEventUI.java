@@ -23,9 +23,9 @@ public class MakeEventUI {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-    public void makeOneTimeEvent() throws ParseException {
+    public void makeOneTimeEvent(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
-        newEvent = setEventDetails(newEvent);
+        newEvent = setEventDetails(newEvent, n, d, lat, lon);
         newEvent.addObserver(eo);
 
         try {
@@ -38,9 +38,9 @@ public class MakeEventUI {
         eventMade(newEvent);
     }
 
-    public void makeEventRepeated() throws ParseException {
+    public void makeEventRepeated(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new RepeatedEvent("", defaultDate, defaultPoint);
-        newEvent = setEventDetails(newEvent);
+        newEvent = setEventDetails(newEvent, n, d, lat, lon);
         newEvent.addObserver(eo);
 
         try {
@@ -53,9 +53,9 @@ public class MakeEventUI {
         eventMade(newEvent);
     }
 
-    public void makeEventSchool() throws ParseException {
+    public void makeEventSchool(String n, String d, String lat, String lon) throws ParseException {
         ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
-        newEvent = (ClassEvent) setEventDetails(newEvent);
+        newEvent = (ClassEvent) setEventDetails(newEvent, n, d, lat, lon);
         newEvent.addObserver(sco);
         newEvent.addObserver(eo);
 
@@ -63,16 +63,25 @@ public class MakeEventUI {
         eventMade(newEvent);
     }
 
-    private Event setEventDetails(Event newEvent) throws ParseException {
-        System.out.println("Please enter event title");
-        newEvent.name = scanner.nextLine();
-        System.out.println("Please enter event date dd/MM/yyyy");
-        String rawDate = scanner.nextLine();
+//    private Event setEventDetails(Event newEvent) throws ParseException {
+//        System.out.println("Please enter event title");
+//        newEvent.name = scanner.nextLine();
+//        System.out.println("Please enter event date dd/MM/yyyy");
+//        String rawDate = scanner.nextLine();
+//        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
+//        newEvent.date = date;
+//        System.out.println("Please enter event location (2 doubles seperated by space)");
+//        newEvent.location = new Point2D.Double(scanner.nextDouble(), scanner.nextDouble());
+//        scanner.nextLine();
+//        return newEvent;
+//    }
+
+    private Event setEventDetails(Event newEvent, String n, String d, String lat, String lon) throws ParseException {
+        newEvent.name = n;
+        String rawDate = d;
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(rawDate);
         newEvent.date = date;
-        System.out.println("Please enter event location (2 doubles seperated by space)");
-        newEvent.location = new Point2D.Double(scanner.nextDouble(), scanner.nextDouble());
-        scanner.nextLine();
+        newEvent.location = new Point2D.Double(Double.parseDouble(lat), Double.parseDouble(lon));
         return newEvent;
     }
 
