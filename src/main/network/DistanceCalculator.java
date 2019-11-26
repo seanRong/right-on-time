@@ -26,7 +26,7 @@ public class DistanceCalculator {
     private static JSONParser parser = new JSONParser();
 
 
-    public DistanceCalculator(JSONArray eventJson) throws IOException, ParseException {
+    public DistanceCalculator(JSONArray eventJson) throws IOException {
         this.eventJson = eventJson;
         findDistance();
 //        System.out.println(findDistance());
@@ -35,9 +35,12 @@ public class DistanceCalculator {
     private void findDistance() throws IOException {
         System.out.println("finding distance btwn first and others");
         eventJson.forEach(event -> coordinates.add(parseEventJsonLocation((JSONObject) event)));
+        System.out.println(coordinates.size());
+        System.out.println(coordinates.get(2));
         for (int i = 0; i < coordinates.size(); i++) {
             parseGoogleJsonDistance(mapData(coordinates.get(0), coordinates.get(i)));
         }
+
     }
 
     private static String parseEventJsonLocation(JSONObject eventJson) {
