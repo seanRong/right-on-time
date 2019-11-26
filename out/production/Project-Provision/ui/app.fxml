@@ -69,6 +69,9 @@
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
                                                 <Button layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#makeEventOneTime" text="Make Event" />
+                                                <TextField fx:id="oneTimeName" layoutX="14.0" layoutY="27.0" promptText="Name" />
+                                                <TextField layoutX="14.0" layoutY="83.0" promptText="Date" />
+                                                <TextField layoutX="14.0" layoutY="136.0" promptText="Location" />
                                              </children>
                                           </AnchorPane>
                                     </content>
