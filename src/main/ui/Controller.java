@@ -35,9 +35,11 @@ public class Controller {
     }
 
     public void load(ActionEvent actionEvent) {
+        gui.getEventManager().load();
     }
 
     public void save(ActionEvent actionEvent) {
+        gui.getEventManager().save();
     }
 
     public void makeEventOneTime(ActionEvent actionEvent) {
@@ -45,7 +47,6 @@ public class Controller {
         String date = oneTimeDate.getCharacters().toString();
         String lat = oneTimeLat.getCharacters().toString();
         String lon = oneTimeLong.getCharacters().toString();
-//        System.out.println(this.gui.getMakeEventUI());
         try {
             gui.getMakeEventUI().makeOneTimeEvent(name, date, lat, lon);
         } catch (ParseException e) {

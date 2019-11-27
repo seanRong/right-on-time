@@ -71,7 +71,7 @@
                                                 <Button layoutX="14.0" layoutY="203.0" mnemonicParsing="false" onAction="#makeEventOneTime" text="Make Event" />
                                                 <TextField fx:id="oneTimeName" layoutX="14.0" layoutY="27.0" promptText="Name" />
                                                 <TextField fx:id="oneTimeDate" layoutX="14.0" layoutY="71.0" promptText="Date" />
-                                                <TextField fx:id="oneTimeLat" layoutX="14.0" layoutY="121.0" promptText="Latitude" />
+                                                <TextField fx:id="oneTimeLat" layoutX="14.0" layoutY="119.0" promptText="Latitude" />
                                                 <TextField fx:id="oneTimeLong" layoutX="14.0" layoutY="164.0" promptText="Longitude" />
                                              </children>
                                           </AnchorPane>
@@ -81,7 +81,11 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <Button layoutX="14.0" layoutY="203.0" mnemonicParsing="false" text="Button" />
+                                                <TextField fx:id="oneTimeName1" layoutX="14.0" layoutY="30.0" promptText="Name" />
+                                                <TextField fx:id="oneTimeDate1" layoutX="14.0" layoutY="76.0" promptText="Date" />
+                                                <TextField fx:id="oneTimeLat1" layoutX="14.0" layoutY="121.0" promptText="Latitude" />
+                                                <TextField fx:id="oneTimeLong1" layoutX="14.0" layoutY="162.0" promptText="Longitude" />
+                                                <Button layoutX="14.0" layoutY="203.0" mnemonicParsing="false" text="Make Event" />
                                              </children>
                                           </AnchorPane>
                                        </content>

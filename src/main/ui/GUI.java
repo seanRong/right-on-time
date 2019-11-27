@@ -24,7 +24,6 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
-//        Parent root = FXMLLoader.load(getClass().getResource("app.fxml"));
         Parent root = loader.load();
         Controller controller = loader.getController();
         controller.setGui(this);
