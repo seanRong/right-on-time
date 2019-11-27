@@ -9,6 +9,7 @@ import static model.SaveModule.parseEventJson;
 
 public class EventManager implements Loadable, Saveable {
     private ArrayList<Event> eventList;
+    private ArrayList<String> readableEventList;
     private JSONArray eventJson;
     public ClassSchedule classSchedule;
     public HashMap<String, Event> fastLookup = new HashMap<>();
@@ -20,6 +21,7 @@ public class EventManager implements Loadable, Saveable {
         classSchedule = new ClassSchedule();
         this.eventJson = eventJson;
         load();
+        this.readableEventList = printEventList(this.eventJson);
     }
 
     public ArrayList<Event> getEventList() {
@@ -61,6 +63,16 @@ public class EventManager implements Loadable, Saveable {
         } finally {
             System.out.println("exiting add protocol");
         }
+    }
+
+    public static ArrayList<String> printEventList(JSONArray eventJson) {
+        ArrayList<String> res = new ArrayList<>();
+        eventJson.forEach(event -> res.add(parseEventJson((JSONObject) event)));
+        return res;
+    }
+
+    public ArrayList<String> getReadableEventList() {
+        return readableEventList;
     }
 
     //EFFECTS: prints the entire eventList, even if it's empty.

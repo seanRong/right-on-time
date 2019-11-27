@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -62,9 +61,8 @@ public class Controller {
         }
     }
 
-    public void setEventListView(ArrayList<model.Event> eventList) {
-        ObservableList<model.Event> observableEventList = FXCollections.observableList(eventList);
+    public void setEventListView(ArrayList<String> eventList) {
+        ObservableList<String> observableEventList = FXCollections.observableList(eventList);
         eventListView.setItems(observableEventList);
-        System.out.println(observableEventList);
     }
 }

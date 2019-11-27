@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.omg.CosNaming.BindingIterator;
 
 import java.text.ParseException;
 
@@ -28,8 +27,8 @@ public class GUI extends Application {
         Parent root = loader.load();
         Controller controller = loader.getController();
         controller.setGui(this);
-        controller.setEventListView(eventManager.getEventJson());
-        System.out.println(controller.getGui());
+        controller.setEventListView(eventManager.getReadableEventList());
+        System.out.println(eventManager.getReadableEventList());
         primaryStage.setTitle("Right On Time");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
