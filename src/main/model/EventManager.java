@@ -19,6 +19,7 @@ public class EventManager implements Loadable, Saveable {
         JSONArray eventJson = new JSONArray();
         classSchedule = new ClassSchedule();
         this.eventJson = eventJson;
+        load();
     }
 
     public ArrayList<Event> getEventList() {
