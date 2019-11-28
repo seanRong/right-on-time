@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 //import static model.SaveModule.parseEventJson;
 
-
+//my api key for Google
 //AIzaSyCi9MhJVXNBZLqEPyDIvzfrX7eRmvBZV4s
 
 //ex by  http://zetcode.com/articles/javareadwebpage/
@@ -36,8 +36,9 @@ public class DistanceCalculator {
         System.out.println("finding distance btwn first and others");
         eventJson.forEach(event -> coordinates.add(parseEventJsonLocation((JSONObject) event)));
         System.out.println(coordinates.size());
-        System.out.println(coordinates.get(2));
+        System.out.println(coordinates);
         for (int i = 0; i < coordinates.size(); i++) {
+            System.out.println(coordinates.get(i));
             parseGoogleJsonDistance(mapData(coordinates.get(0), coordinates.get(i)));
         }
 

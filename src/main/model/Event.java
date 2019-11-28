@@ -7,7 +7,7 @@ import java.util.Observable;
 public abstract class Event extends Observable implements Activity {
     public String name;
     public Date date;
-    public Point2D.Double location; //will be coordinates
+    public Point2D.Double location;
 
     // Constructs an event
     //MODIFIES: this
@@ -67,10 +67,4 @@ public abstract class Event extends Observable implements Activity {
         //no date equality though
         return (event.name.equals(this.name) && event.location == this.location);
     }
-
-//    not necessary
-//    @Override
-//    public int hashCode() {
-//        return this.name.hashCode();
-//    }
 }

@@ -25,7 +25,7 @@ public class GUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
+        AppController controller = loader.getController();
         controller.setGui(this);
         controller.setEventListView(eventManager.getReadableEventList());
         System.out.println(eventManager.getReadableEventList());
