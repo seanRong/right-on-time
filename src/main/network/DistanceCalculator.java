@@ -35,6 +35,8 @@ public class DistanceCalculator {
 //        System.out.println(findDistance());
     }
 
+    //MOD: coordinates
+    //EFF: calcs duration of time required to walk from home to each location
     public void findDistance() throws IOException {
         System.out.println("finding distance btwn first and others");
         eventJson.forEach(event -> coordinates.add(parseEventJsonLocation((JSONObject) event)));

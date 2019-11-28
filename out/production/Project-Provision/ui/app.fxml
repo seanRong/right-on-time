@@ -36,6 +36,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Options">
           <items>
+                  <MenuItem mnemonicParsing="false" onAction="#googleMaps" text="Google Maps" />
             <MenuItem mnemonicParsing="false" onAction="#recalculate" text="Recalculate" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#setHome" text="Set Home" />
@@ -56,7 +57,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#adminInput" text="Confirm" />
+                              <Button layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#adminConfirm" text="Confirm" />
                               <TextArea fx:id="adminTextArea" layoutX="15.0" layoutY="56.0" prefHeight="104.0" prefWidth="191.0" promptText="Admin queries will be displayed here" />
                         <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Admin" textAlignment="CENTER" wrapText="false">
                           <font>

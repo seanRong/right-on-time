@@ -20,7 +20,7 @@ public class MakeEventUI {
 
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
-    // EFFECTS: shows the user what they just added
+    // EFFECTS: creates a one time event and adds it to the eventlist
     public Event makeOneTimeEvent(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent, n, d, lat, lon);
@@ -36,7 +36,10 @@ public class MakeEventUI {
         return newEvent;
     }
 
-    public void makeEventRepeated(String n, String d, String lat, String lon) throws ParseException {
+    // REQUIRES: eventList already constructed
+    // MODIFIES: existing evenList
+    // EFFECTS: creates a repeated event and adds it to the eventlist
+    public Event makeEventRepeated(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new RepeatedEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent, n, d, lat, lon);
 
@@ -48,15 +51,16 @@ public class MakeEventUI {
             System.out.println("failed to add");
         }
         eventMade(newEvent);
+        return newEvent;
     }
 
-    public void makeEventSchool(String n, String d, String lat, String lon) throws ParseException {
-        ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
-        newEvent = (ClassEvent) setEventDetails(newEvent, n, d, lat, lon);
-
-        newEvent.setSchedule(eventManager.classSchedule);
-        eventMade(newEvent);
-    }
+//    public void makeEventSchool(String n, String d, String lat, String lon) throws ParseException {
+//        ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
+//        newEvent = (ClassEvent) setEventDetails(newEvent, n, d, lat, lon);
+//
+//        newEvent.setSchedule(eventManager.classSchedule);
+//        eventMade(newEvent);
+//    }
 
 //    private Event setEventDetails(Event newEvent) throws ParseException {
 //        System.out.println("Please enter event title");
@@ -80,6 +84,7 @@ public class MakeEventUI {
         return newEvent;
     }
 
+    //EFF: prints the event just made to console.
     public void eventMade(Event newEvent) {
         System.out.println("event added, it's called: ");
         System.out.println(

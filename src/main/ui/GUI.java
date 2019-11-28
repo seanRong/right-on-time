@@ -20,6 +20,7 @@ public class GUI extends Application {
         editEventUI = new EditEventUI(eventManager);
     }
 
+    //EFF: creates the GUI for the application. sets up controllers and the primary stage
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("app.fxml"));
@@ -45,6 +46,7 @@ public class GUI extends Application {
         return this.editEventUI;
     }
 
+    //EFF: starts app by launching a new GUI
     public static void main(String[] args) throws ParseException {
         launch(args);
         new GUI();

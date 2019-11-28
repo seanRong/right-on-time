@@ -30,10 +30,14 @@ public class EventManager implements Loadable, Saveable {
         this.eventList = saveModule.loadEventList(eventJson);
     }
 
+    //MOD: save text file
+    //EFF: writes current eventJson to the text file
     public void save() {
         saveModule.save(eventJson);
     }
 
+    //REQ: eventList, eventJson, fastLookUp to exist
+    //MOD: eventList, eventJson, fastLookUp to exist
     public void addEvent(Event newEvent) {
         try {
             dupeCheck(newEvent);
@@ -51,6 +55,7 @@ public class EventManager implements Loadable, Saveable {
         }
     }
 
+    //EFF: returns eventJson as an array of parsed Strings
     public static ArrayList<String> printEventList(JSONArray eventJson) {
         ArrayList<String> res = new ArrayList<>();
         eventJson.forEach(event -> res.add(parseEventJson((JSONObject) event)));
@@ -77,12 +82,13 @@ public class EventManager implements Loadable, Saveable {
 
     }
 
+    //EFF: prints schoolSchedule as a String
     public String dumpSchoolSchedule() {
         System.out.println("current school schedule:");
         return classSchedule.printableSchedule();
     }
 
-
+    //EFF: if event dates coincide, throws TooBusyException
     public void dupeCheck(Event newEvent) throws TooBusyException {
         boolean dupe = false;
         for (int i = 0; i < eventList.size(); i++) {
@@ -95,6 +101,7 @@ public class EventManager implements Loadable, Saveable {
         }
     }
 
+    //EFF: if event dates would make you go back in time, throws AbsurdTimeException
     public void absurdTimeChecker(Date d) throws AbsurdTimeException {
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date curr = new Date();

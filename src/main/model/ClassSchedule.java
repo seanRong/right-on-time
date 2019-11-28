@@ -32,7 +32,7 @@ public class ClassSchedule {
         return schedule.get(index);
     }
 
-    //EFF: gives you a string that represents the schedule
+    //EFF: returns a string that represents the schedule
     public String printableSchedule() {
         String toPrint = "";
         for (Event e: schedule) {

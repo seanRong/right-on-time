@@ -55,13 +55,8 @@ public abstract class Event extends Observable implements Activity {
 
     public abstract String getEventType();
 
-    public void notifyUp() {
-        setChanged();
-        notifyObservers();
-    }
-
-
     //some cred to GeeksForGeeks.org
+    //MOD: overrides default equals for hashmap
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

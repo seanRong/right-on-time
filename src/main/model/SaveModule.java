@@ -19,6 +19,7 @@ public class SaveModule {
         synchronizedEventList = new ArrayList<>();
     }
 
+    //EFF: creates a JSONArray from previous save text
     public JSONArray load() {
         //json-simple library
         JSONParser jsonParser = new JSONParser();
@@ -40,6 +41,8 @@ public class SaveModule {
         return eventJson;
     }
 
+    //MOD: schedule.json save file
+    //EFF: uses current eventJson to overwrite the previous save
     public void save(JSONArray eventJson) {
         //json-simple library
         //Write JSON file
@@ -53,6 +56,8 @@ public class SaveModule {
         }
     }
 
+
+    //EFF: creates a new JSONObject from an Event
     public JSONObject createJsonObject(Event newEvent) {
         JSONObject eventDetails = new JSONObject();
         eventDetails.put("name", newEvent.getEventName());
@@ -68,6 +73,7 @@ public class SaveModule {
         return eventObject;
     }
 
+    //EFF: takes an eventJson and returns a readable string.
     public static String parseEventJson(JSONObject eventJson) {
         JSONObject eventObject = (JSONObject) eventJson.get("event");
 
@@ -80,6 +86,7 @@ public class SaveModule {
         return (name + " on " + time + " at " + location);
     }
 
+    //turns a event in Json form to an Event Object
     public static Event parseEventJsonAsEvent(JSONObject eventJson) {
         Date date = null;
 
@@ -105,6 +112,7 @@ public class SaveModule {
 
     }
 
+    //generates an event with care of what type it is
     public static Event genEventByType(String name, Date date, Point2D.Double point, String type) {
         Event e = null;
 
@@ -119,6 +127,7 @@ public class SaveModule {
         return e;
     }
 
+    //EFF: creates an eventList that is the same state of the current eventJson.
     public ArrayList<Event> loadEventList(JSONArray eventJson) {
         eventJson.forEach(event -> synchronizedEventList.add(parseEventJsonAsEvent((JSONObject) event)));
         return synchronizedEventList;

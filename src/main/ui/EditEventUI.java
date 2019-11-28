@@ -43,7 +43,11 @@ public class EditEventUI {
         System.out.println(e.location);
     }
 
+    //MODIFIES: eventJson, evenList, fastLookup of eventManager
+    //EFF: deletes the given event
     public void deleteEvent(Event foundEvent) {
+        int index = eventManager.getEventList().indexOf(foundEvent);
+        eventManager.getEventJson().remove(index);
         eventManager.getEventList().remove(foundEvent);
         eventManager.fastLookup.remove(foundEvent.name);
     }
