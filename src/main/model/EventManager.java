@@ -17,31 +17,16 @@ public class EventManager implements Loadable, Saveable {
 
     public EventManager() {
         this.eventList = new ArrayList<>();
-        JSONArray eventJson = new JSONArray();
+        eventJson = new JSONArray();
         classSchedule = new ClassSchedule();
-        this.eventJson = eventJson;
         load();
         this.readableEventList = printEventList(this.eventJson);
     }
 
-    public ArrayList<Event> getEventList() {
-        return this.eventList;
-    }
-
-    public ClassSchedule getClassSchedule() {
-        return this.classSchedule;
-    }
-
-    public JSONArray getEventJson() {
-        return this.eventJson;
-    }
-
-    public SaveModule getSaveModule() {
-        return this.saveModule;
-    }
 
     public void load() {
         this.eventJson = saveModule.load();
+        this.eventList = saveModule.loadEventList(eventJson);
     }
 
     public void save() {
@@ -115,6 +100,26 @@ public class EventManager implements Loadable, Saveable {
         if (d.compareTo(curr) < 0) {
             throw new AbsurdTimeException("Cannot go back in time");
         }
+    }
+
+    public ArrayList<Event> getEventList() {
+        return this.eventList;
+    }
+
+    public ClassSchedule getClassSchedule() {
+        return this.classSchedule;
+    }
+
+    public JSONArray getEventJson() {
+        return this.eventJson;
+    }
+
+    public SaveModule getSaveModule() {
+        return this.saveModule;
+    }
+
+    public void setEventList(ArrayList<Event> eventList) {
+        this.eventList = eventList;
     }
 
 }

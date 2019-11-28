@@ -46,9 +46,7 @@ public abstract class Event extends Observable implements Activity {
         return this.name + " on " + this.date + " at " + this.location;
     }
 
-    public String getEventType() {
-        return "no type specified";
-    }
+    public abstract String getEventType();
 
     public void notifyUp() {
         setChanged();

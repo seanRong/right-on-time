@@ -13,7 +13,6 @@ public class MakeEventUI {
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
     Scanner scanner = new Scanner(System.in);
     EventManager eventManager;
-    SchoolEventObserver sco = new SchoolEventObserver();
     EventObserver eo = new EventObserver();
 
     public MakeEventUI(EventManager eventManager) throws ParseException {
@@ -56,7 +55,6 @@ public class MakeEventUI {
     public void makeEventSchool(String n, String d, String lat, String lon) throws ParseException {
         ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
         newEvent = (ClassEvent) setEventDetails(newEvent, n, d, lat, lon);
-        newEvent.addObserver(sco);
         newEvent.addObserver(eo);
 
         newEvent.setSchedule(eventManager.classSchedule);

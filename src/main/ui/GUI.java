@@ -13,7 +13,6 @@ public class GUI extends Application {
     private EventManager eventManager;
     private MakeEventUI makeEventUI;
     private EditEventUI editEventUI;
-//    private Controller controller;
 
     public GUI() throws ParseException {
         eventManager = new EventManager();
@@ -28,17 +27,12 @@ public class GUI extends Application {
         AppController controller = loader.getController();
         controller.setGui(this);
         controller.setEventListView(eventManager.getReadableEventList());
-        System.out.println(eventManager.getReadableEventList());
+//        System.out.println(eventManager.getReadableEventList());
         primaryStage.setTitle("Right On Time");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 
-
-    public static void main(String[] args) throws ParseException {
-        launch(args);
-        new GUI();
-    }
 
     public EventManager getEventManager() {
         return eventManager;
@@ -52,7 +46,9 @@ public class GUI extends Application {
         return this.editEventUI;
     }
 
-//    public void setController(Controller controller) {
-//        this.controller = controller;
-//    }
+    public static void main(String[] args) throws ParseException {
+        launch(args);
+        new GUI();
+    }
+
 }
