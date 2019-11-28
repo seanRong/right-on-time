@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import model.Event;
 import network.DistanceCalculator;
 
 import java.io.IOException;
@@ -24,6 +25,8 @@ public class AppController {
     private TextField oneTimeLong;
     @FXML
     private ListView eventListView;
+    @FXML
+    private ListView distanceListView;
 
 
     public void setGui(GUI gui) {
@@ -36,7 +39,6 @@ public class AppController {
     }
 
     public void masterInput(ActionEvent actionEvent) {
-        System.out.println("pressed");
     }
 
     public void quit(ActionEvent actionEvent) {
@@ -53,7 +55,8 @@ public class AppController {
 
     public void recalculate(ActionEvent actionEvent) {
         try {
-            new DistanceCalculator(gui.getEventManager().getEventJson());
+            DistanceCalculator dc = new DistanceCalculator(gui.getEventManager().getEventJson());
+            setDistanceListView(dc.getDistanceList().getTravelTimes());
         } catch (IOException e) {
             System.out.println("Recalculate function: distance calculator failure");
         }
@@ -65,7 +68,8 @@ public class AppController {
         String lat = oneTimeLat.getCharacters().toString();
         String lon = oneTimeLong.getCharacters().toString();
         try {
-            gui.getMakeEventUI().makeOneTimeEvent(name, date, lat, lon);
+            Event event = gui.getMakeEventUI().makeOneTimeEvent(name, date, lat, lon);
+            eventListView.getItems().add(event.getEventDetails());
         } catch (ParseException e) {
             System.out.println("parse failed at controller");
         }
@@ -80,5 +84,15 @@ public class AppController {
     }
 
     public void makeEventSchool(ActionEvent actionEvent) {
+    }
+
+    public void newFile(ActionEvent actionEvent) {
+        gui.getEventManager().wipe();
+        eventListView.getItems().clear();
+    }
+
+    public void setDistanceListView(ArrayList<String> distanceList) {
+        ObservableList<String> odl = FXCollections.observableList(distanceList);
+        distanceListView.setItems(odl);
     }
 }

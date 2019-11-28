@@ -1,6 +1,8 @@
 package model;
 
 import java.awt.geom.Point2D;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Observable;
 
@@ -43,7 +45,12 @@ public abstract class Event extends Observable implements Activity {
 
     //EFFECTS: returns a string containing the name, date and location of the event
     public String getEventDetails() {
-        return this.name + " on " + this.date + " at " + this.location;
+        String n = String.valueOf(name);
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String d = dateFormat.format(date);
+        String lat = Double.toString(location.getX());
+        String lon = Double.toString(location.getY());
+        return n + " on " + d + " at " + lat + "," + lon;
     }
 
     public abstract String getEventType();

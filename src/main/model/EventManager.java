@@ -122,4 +122,9 @@ public class EventManager implements Loadable, Saveable {
         this.eventList = eventList;
     }
 
+    public void wipe() {
+        this.eventList = new ArrayList<>();
+        this.eventJson = new JSONArray();
+    }
+
 }

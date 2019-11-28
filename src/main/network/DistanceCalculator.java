@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,13 +22,15 @@ import java.util.ArrayList;
 
 public class DistanceCalculator {
     private JSONArray eventJson;
-    private SaveModule saveModule;  //recover earlier plz
     private ArrayList<String> coordinates = new ArrayList<>();
     private static JSONParser parser = new JSONParser();
-
+    private DistanceList distanceList;
+    private Point2D.Double home;
 
     public DistanceCalculator(JSONArray eventJson) throws IOException {
+        home = new Point2D.Double(49.264364, -123.248505);
         this.eventJson = eventJson;
+        this.distanceList = new DistanceList(home);
         findDistance();
 //        System.out.println(findDistance());
     }
@@ -35,11 +38,11 @@ public class DistanceCalculator {
     private void findDistance() throws IOException {
         System.out.println("finding distance btwn first and others");
         eventJson.forEach(event -> coordinates.add(parseEventJsonLocation((JSONObject) event)));
-        System.out.println(coordinates.size());
-        System.out.println(coordinates);
+        String homeString = home.getX() + "," + home.getY();
         for (int i = 0; i < coordinates.size(); i++) {
-            System.out.println(coordinates.get(i));
-            parseGoogleJsonDistance(mapData(coordinates.get(0), coordinates.get(i)));
+//            System.out.println(coordinates.get(i));
+            this.distanceList.getTravelTimes().add(
+                    parseGoogleJsonDistance(mapData(homeString, coordinates.get(i))));
         }
 
     }
@@ -52,7 +55,7 @@ public class DistanceCalculator {
         return location;
     }
 
-    private static void parseGoogleJsonDistance(String sb) {
+    private static String parseGoogleJsonDistance(String sb) {
         JSONObject json = null;
 
         try {
@@ -65,9 +68,9 @@ public class DistanceCalculator {
         JSONObject elementsObj = (JSONObject) rows.get(0);
         JSONArray elements = (JSONArray) elementsObj.get("elements");
         JSONObject distanceObj = (JSONObject) elements.get(0);
-        JSONObject distance = (JSONObject) distanceObj.get("distance");
+        JSONObject distance = (JSONObject) distanceObj.get("duration");
         String distanceText = (String) distance.get("text");
-        System.out.println(distanceText);
+        return distanceText;
 
     }
 
@@ -78,6 +81,7 @@ public class DistanceCalculator {
             String distanceQuery = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="
                     + firstLocation + "&destinations=" + secondLocation + "&key=";
             URL url = new URL(distanceQuery + "AIzaSyCi9MhJVXNBZLqEPyDIvzfrX7eRmvBZV4s");
+//            System.out.println(url);
             br = new BufferedReader(new InputStreamReader(url.openStream()));
 
             String line;
@@ -96,6 +100,14 @@ public class DistanceCalculator {
                 br.close();
             }
         }
+    }
+
+    public DistanceList getDistanceList() {
+        return distanceList;
+    }
+
+    public void setHome(Point2D.Double home) {
+        this.home = home;
     }
 }
 

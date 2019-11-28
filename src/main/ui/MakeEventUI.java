@@ -22,7 +22,7 @@ public class MakeEventUI {
     // REQUIRES: eventList already constructed
     // MODIFIES: existing evenList
     // EFFECTS: shows the user what they just added
-    public void makeOneTimeEvent(String n, String d, String lat, String lon) throws ParseException {
+    public Event makeOneTimeEvent(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent, n, d, lat, lon);
         newEvent.addObserver(eo);
@@ -35,6 +35,7 @@ public class MakeEventUI {
             System.out.println("failed to add");
         }
         eventMade(newEvent);
+        return newEvent;
     }
 
     public void makeEventRepeated(String n, String d, String lat, String lon) throws ParseException {
