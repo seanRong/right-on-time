@@ -23,7 +23,8 @@ public class EventManager implements Loadable, Saveable {
         this.readableEventList = printEventList(this.eventJson);
     }
 
-
+    //MOD: eventList and evenJson of this
+    //EFF: re-initializes both, using previous save file
     public void load() {
         this.eventJson = saveModule.load();
         this.eventList = saveModule.loadEventList(eventJson);
@@ -122,6 +123,8 @@ public class EventManager implements Loadable, Saveable {
         this.eventList = eventList;
     }
 
+    //MOD: eventList and evenJson of this
+    //EFF: re-initializes both, essentially wiping them of all data.
     public void wipe() {
         this.eventList = new ArrayList<>();
         this.eventJson = new JSONArray();

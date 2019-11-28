@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import network.DistanceCalculator;
 
 import java.text.ParseException;
 
@@ -18,7 +17,7 @@ public class GUI extends Application {
     public GUI() throws ParseException {
         eventManager = new EventManager();
         makeEventUI = new MakeEventUI(eventManager);
-//        editEventUI = new EditEventUI(eventManager);
+        editEventUI = new EditEventUI(eventManager);
     }
 
     @Override
@@ -28,7 +27,6 @@ public class GUI extends Application {
         AppController controller = loader.getController();
         controller.setGui(this);
         controller.setEventListView(eventManager.getReadableEventList());
-//        System.out.println(eventManager.getReadableEventList());
         primaryStage.setTitle("Right On Time");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

@@ -14,6 +14,8 @@ public class ClassEvent extends RepeatedEvent {
         return this.cs;
     }
 
+    //REQ: cs already instantiated somewhere
+    //MOD: the class schedule passed in as param
     public void setSchedule(ClassSchedule cs) {
         if (this.cs != null) {
             this.cs.removeClass(this);

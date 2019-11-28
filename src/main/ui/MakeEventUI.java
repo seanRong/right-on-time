@@ -13,7 +13,6 @@ public class MakeEventUI {
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse(defaultDateRaw);
     Scanner scanner = new Scanner(System.in);
     EventManager eventManager;
-    EventObserver eo = new EventObserver();
 
     public MakeEventUI(EventManager eventManager) throws ParseException {
         this.eventManager = eventManager;
@@ -25,7 +24,6 @@ public class MakeEventUI {
     public Event makeOneTimeEvent(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new OneTimeEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent, n, d, lat, lon);
-        newEvent.addObserver(eo);
 
         try {
             eventManager.dupeCheck((Event) newEvent);
@@ -41,7 +39,6 @@ public class MakeEventUI {
     public void makeEventRepeated(String n, String d, String lat, String lon) throws ParseException {
         Event newEvent = new RepeatedEvent("", defaultDate, defaultPoint);
         newEvent = setEventDetails(newEvent, n, d, lat, lon);
-        newEvent.addObserver(eo);
 
         try {
             eventManager.dupeCheck(newEvent);
@@ -56,7 +53,6 @@ public class MakeEventUI {
     public void makeEventSchool(String n, String d, String lat, String lon) throws ParseException {
         ClassEvent newEvent = new ClassEvent("", defaultDate, defaultPoint);
         newEvent = (ClassEvent) setEventDetails(newEvent, n, d, lat, lon);
-        newEvent.addObserver(eo);
 
         newEvent.setSchedule(eventManager.classSchedule);
         eventMade(newEvent);

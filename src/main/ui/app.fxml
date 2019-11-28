@@ -38,7 +38,7 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#recalculate" text="Recalculate" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Set Home" />
+            <MenuItem mnemonicParsing="false" onAction="#setHome" text="Set Home" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -56,9 +56,9 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <Button layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#masterInput" text="Confirm" />
-                              <TextArea layoutX="15.0" layoutY="56.0" prefHeight="104.0" prefWidth="191.0" promptText="Admin queries will be displayed here" />
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
+                              <Button layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#adminInput" text="Confirm" />
+                              <TextArea fx:id="adminTextArea" layoutX="15.0" layoutY="56.0" prefHeight="104.0" prefWidth="191.0" promptText="Admin queries will be displayed here" />
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Admin" textAlignment="CENTER" wrapText="false">
                           <font>
                             <Font size="18.0" fx:id="x1" />
                           </font>
@@ -117,7 +117,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <TextField layoutX="16.0" layoutY="204.0" />
+                  <TextField fx:id="adminInput" layoutX="16.0" layoutY="204.0" />
                   <Label layoutX="18.0" layoutY="178.0" text="Input" />
           </children>
         </AnchorPane>
@@ -135,17 +135,22 @@
                         </content>
                       </Tab>
                       <Tab text="Distance-Time Calculations">
-                          <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                  <children>
-                                      <ListView fx:id="distanceListView" layoutX="70.0" layoutY="61.0" prefHeight="521.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                  </children>
-                              </AnchorPane>
-                          </content>
+                        <content>
+                          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView fx:id="distanceListView" prefHeight="521.0" prefWidth="417.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
+                        </content>
                       </Tab>
                         <Tab text="Search">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="searchBox" layoutX="14.0" layoutY="14.0" />
+                                    <Button layoutX="14.0" layoutY="48.0" mnemonicParsing="false" onAction="#eventSearch" text="Search" />
+                                    <TextField fx:id="newDate" layoutX="14.0" layoutY="248.0" promptText="New Date" />
+                                    <TextField fx:id="newLocation" layoutX="188.0" layoutY="248.0" promptText="New Location" />
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                     </tabs>
