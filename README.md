@@ -1,4 +1,4 @@
-# project_m6i2b
-Sean Rong's project for CPSC 210
+# right-on-time
+Scheduler with GPS functionality
 
 ![demo pic](right-on-time-demo.png)
