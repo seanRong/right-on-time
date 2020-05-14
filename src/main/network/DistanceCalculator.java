@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 //import static model.SaveModule.parseEventJson;
 
-//my api key for Google
-//AIzaSyCi9MhJVXNBZLqEPyDIvzfrX7eRmvBZV4s
 
 //ex by  http://zetcode.com/articles/javareadwebpage/
 

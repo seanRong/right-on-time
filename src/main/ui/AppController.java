@@ -13,6 +13,7 @@ import javafx.scene.web.WebView;
 import model.Event;
 import network.DistanceCalculator;
 
+import javax.swing.*;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.net.URI;
@@ -66,10 +67,12 @@ public class AppController {
     public void quit(ActionEvent actionEvent) {
         System.exit(0);
     }
+
     //EFF: calls eventManager's load
     public void load(ActionEvent actionEvent) {
         gui.getEventManager().load();
     }
+
     //EFF: calls eventManager's save
     public void save(ActionEvent actionEvent) {
         gui.getEventManager().save();
@@ -191,12 +194,17 @@ public class AppController {
             dc.findDistance();
             setDistanceListView(dc.getDistanceList().getTravelTimes());
         }
-        adminTextArea.setText("setted new home");
+        adminTextArea.setText("set new home");
 
     }
 
     //EFF: opens google maps in native browser
     public void googleMaps(ActionEvent actionEvent) throws Exception {
         java.awt.Desktop.getDesktop().browse(new URI("https://maps.google.com"));
+    }
+
+    public void about(ActionEvent actionEvent) {
+        JOptionPane.showMessageDialog(null, "This application schedules and calculates",
+                "About", JOptionPane.INFORMATION_MESSAGE);
     }
 }
