@@ -46,11 +46,11 @@ public abstract class Event extends Observable implements Activity {
     //EFFECTS: returns a string containing the name, date and location of the event
     public String getEventDetails() {
         String n = String.valueOf(name);
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String d = dateFormat.format(date);
         String lat = Double.toString(location.getX());
         String lon = Double.toString(location.getY());
-        return n + " on " + d + " at " + lat + "," + lon;
+        return n + " on " + d + " at " + lat + "," + lon + " type: " + this.getEventType();
     }
 
     public abstract String getEventType();

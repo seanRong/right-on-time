@@ -12,7 +12,7 @@ public class ClassScheduleTest {
     Point2D.Double point = new Point2D.Double(2000, 2000);
     ClassSchedule cs = new ClassSchedule();
     Date defaultDate = new SimpleDateFormat("dd/MM/yyyy").parse("06/20/2099");
-    ClassEvent ce = new ClassEvent("CPSC", defaultDate, point);
+    SchoolEvent ce = new SchoolEvent("CPSC", defaultDate, point);
 
     public ClassScheduleTest() throws ParseException {
     }

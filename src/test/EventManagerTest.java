@@ -38,7 +38,7 @@ public class EventManagerTest {
         anotherEvent = new OneTimeEvent("second event", secondDate, pointTwo);
         thirdEvent = new RepeatedEvent("third event", thirdDate, point);
         ClassSchedule classSchedule = new ClassSchedule();
-        ClassEvent classEvent = new ClassEvent("school", defaultDate, pointTwo);
+        SchoolEvent schoolEvent = new SchoolEvent("school", defaultDate, pointTwo);
     }
 
     @Test
@@ -60,10 +60,10 @@ public class EventManagerTest {
 
     @Test
     void testDumpSchool() {
-        ClassEvent classEvent = new ClassEvent("school", defaultDate, pointTwo);
+        SchoolEvent schoolEvent = new SchoolEvent("school", defaultDate, pointTwo);
         ClassSchedule classSchedule = new ClassSchedule();
-        classSchedule.addClass(classEvent);
-        eventManagerTest.getClassSchedule().addClass(classEvent);
+        classSchedule.addClass(schoolEvent);
+        eventManagerTest.getClassSchedule().addClass(schoolEvent);
         assertEquals(classSchedule.printableSchedule(), eventManagerTest.dumpSchoolSchedule());
     }
 

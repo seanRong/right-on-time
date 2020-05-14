@@ -62,7 +62,7 @@ public class SaveModule {
         JSONObject eventDetails = new JSONObject();
         eventDetails.put("name", newEvent.getEventName());
         eventDetails.put("location", newEvent.getEventLocation().getX() + "," + newEvent.getEventLocation().getY());
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = dateFormat.format(newEvent.date);
         eventDetails.put("time", strDate);
         eventDetails.put("type", newEvent.getEventType());
@@ -117,7 +117,7 @@ public class SaveModule {
         Event e = null;
 
         if (type.equals("school")) {
-            e = new ClassEvent(name, date, point);
+            e = new SchoolEvent(name, date, point);
         } else if (type.equals("repeated")) {
             e = new RepeatedEvent(name, date, point);
         } else {

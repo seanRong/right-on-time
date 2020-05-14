@@ -23,4 +23,5 @@ public class OneTimeEvent extends Event {
     public String getEventType() {
         return "one time";
     }
+
 }

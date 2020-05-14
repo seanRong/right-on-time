@@ -11,13 +11,13 @@ public class ClassSchedule {
 
     //MOD: this
     //EFF: adds given class from this schedule
-    public void addClass(ClassEvent ce) {
+    public void addClass(SchoolEvent ce) {
         schedule.add(ce);
     }
 
     //MOD: this
     //EFF: removes given class from this schedule
-    public void removeClass(ClassEvent ce) {
+    public void removeClass(SchoolEvent ce) {
         schedule.remove(ce);
     }
 
