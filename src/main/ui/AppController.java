@@ -182,8 +182,9 @@ public class AppController {
     //EFF: reruns distance calculator to populate with new time values
     public void setHome(ActionEvent actionEvent) throws IOException {
         TextInputDialog dialog = new TextInputDialog("");
+        dialog.setHeaderText(null);
         dialog.setTitle("New Home");
-        dialog.setContentText("Enter new latitude and longitude");
+        dialog.setContentText("Enter new latitude and longitude. Format LAT, LONG");
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
